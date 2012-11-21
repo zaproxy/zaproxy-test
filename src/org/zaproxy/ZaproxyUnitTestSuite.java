@@ -7,6 +7,7 @@ import org.parosproxy.paros.core.scanner.UtilUnitTest;
 import org.zaproxy.zap.spider.URLResolverUnitTest;
 
 import ch.csnc.extension.httpclient.AliasKeyManagerUnitTest;
+import ch.csnc.extension.util.EncodingUnitTest;
 
 /**
  * Suite for all unit tests of ZAP. Tests attached to this suite must run
@@ -16,7 +17,7 @@ import ch.csnc.extension.httpclient.AliasKeyManagerUnitTest;
  * @author bjoern.kimminich@gmx.de
  */
 @RunWith(Suite.class)
-@SuiteClasses({ URLResolverUnitTest.class, AliasKeyManagerUnitTest.class, UtilUnitTest.class })
+@SuiteClasses({ URLResolverUnitTest.class, AliasKeyManagerUnitTest.class, UtilUnitTest.class, EncodingUnitTest.class })
 public class ZaproxyUnitTestSuite {
 
 }
