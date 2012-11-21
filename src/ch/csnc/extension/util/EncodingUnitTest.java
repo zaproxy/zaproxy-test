@@ -45,12 +45,12 @@ public class EncodingUnitTest {
 
 	@Test
 	public void shouldEncodeStringIntoCorrectUrlString() {
-		assertThat(Encoding.urlEncode("Héllö Wôrld"), is(equalTo("H%C3%A9ll%C3%B6+W%C3%B4rld")));
+		assertThat(Encoding.urlEncode("He//o Wor/d"), is(equalTo("He%2F%2Fo+Wor%2Fd")));
 	}
 
 	@Test
 	public void shouldDecodeUrlStringIntoCorrectString() {
-		assertThat(Encoding.urlDecode("H%C3%A9ll%C3%B6+W%C3%B4rld"), is(equalTo("Héllö Wôrld")));
+		assertThat(Encoding.urlDecode("He%2F%2Fo+Wor%2Fd"), is(equalTo("He//o Wor/d")));
 	}
 
 }
