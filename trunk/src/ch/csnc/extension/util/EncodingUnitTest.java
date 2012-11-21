@@ -14,13 +14,43 @@ import org.junit.Test;
 public class EncodingUnitTest {
 
 	@Test
-	public void shouldCovertDataIntoCorrectBase64String() {
+	public void shouldConvertDataIntoCorrectBase64String() {
 		assertThat(Encoding.base64encode("Hello World".getBytes()), is(equalTo("SGVsbG8gV29ybGQ=")));
 	}
 
 	@Test
-	public void shouldBase64StringIntoCorrectCovertData() {
+	public void shouldConvertBase64StringIntoCorrectData() {
 		assertThat(Encoding.base64decode("SGVsbG8gV29ybGQ="), is(equalTo("Hello World".getBytes())));
+	}
+
+	@Test
+	public void shouldConvertDataIntoCorrectHexString() {
+		assertThat(Encoding.toHexString("Hello World".getBytes()), is(equalTo("48656c6c6f20576f726c64")));
+	}
+
+	@Test
+	public void shouldConvertStringIntoCorrectMD5Hash() {
+		assertThat(Encoding.hashMD5("Hello World"), is(equalTo("b10a8db164e0754105b7a99be72e3fe5")));
+	}
+
+	@Test
+	public void shouldConvertStringIntoCorrectSHAHash() {
+		assertThat(Encoding.hashSHA("Hello World"), is(equalTo("0a4d55a8d778e5022fab701977c5d840bbc486d0")));
+	}
+
+	@Test
+	public void shouldConvertStringIntoCorrectRot13Cipher() {
+		assertThat(Encoding.rot13("Hello World"), is(equalTo("Uryyb Jbeyq")));
+	}
+
+	@Test
+	public void shouldEncodeStringIntoCorrectUrlString() {
+		assertThat(Encoding.urlEncode("Héllö Wôrld"), is(equalTo("H%C3%A9ll%C3%B6+W%C3%B4rld")));
+	}
+
+	@Test
+	public void shouldDecodeUrlStringIntoCorrectString() {
+		assertThat(Encoding.urlDecode("H%C3%A9ll%C3%B6+W%C3%B4rld"), is(equalTo("Héllö Wôrld")));
 	}
 
 }
