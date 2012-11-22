@@ -3,6 +3,7 @@ package org.zaproxy;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.parosproxy.paros.core.scanner.KbUnitTest;
 import org.parosproxy.paros.core.scanner.UtilUnitTest;
 import org.zaproxy.zap.spider.URLResolverUnitTest;
 
@@ -17,7 +18,7 @@ import ch.csnc.extension.util.EncodingUnitTest;
  * @author bjoern.kimminich@gmx.de
  */
 @RunWith(Suite.class)
-@SuiteClasses({ URLResolverUnitTest.class, AliasKeyManagerUnitTest.class, UtilUnitTest.class, EncodingUnitTest.class })
+@SuiteClasses({ URLResolverUnitTest.class, AliasKeyManagerUnitTest.class, UtilUnitTest.class, EncodingUnitTest.class, KbUnitTest.class })
 public class ZaproxyUnitTestSuite {
 
 }
