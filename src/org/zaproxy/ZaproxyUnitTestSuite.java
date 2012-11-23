@@ -10,6 +10,7 @@ import org.zaproxy.zap.spider.URLResolverUnitTest;
 
 import ch.csnc.extension.httpclient.AliasKeyManagerUnitTest;
 import ch.csnc.extension.util.EncodingUnitTest;
+import ch.csnc.extension.util.NullComparatorUnitTest;
 
 /**
  * Suite for all unit tests of ZAP. Tests attached to this suite must run
@@ -21,7 +22,7 @@ import ch.csnc.extension.util.EncodingUnitTest;
 @RunWith(Suite.class)
 @SuiteClasses({ URLResolverUnitTest.class, AliasKeyManagerUnitTest.class,
 		UtilUnitTest.class, EncodingUnitTest.class, KbUnitTest.class,
-		ContextUnitTest.class })
+		ContextUnitTest.class, NullComparatorUnitTest.class })
 public class ZaproxyUnitTestSuite {
 
 }
