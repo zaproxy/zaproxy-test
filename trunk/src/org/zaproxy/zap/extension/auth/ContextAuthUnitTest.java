@@ -18,7 +18,7 @@ public class ContextAuthUnitTest {
 	@Mock
 	private HttpMessage loginMessage;
 	private static final Pattern LOGGED_IN_INDICATION = Pattern.compile("loggedIn");
-	private static final Pattern LOGGED_OUT_INDICATION = Pattern.compile("loggedOUT");
+	private static final Pattern LOGGED_OUT_INDICATION = Pattern.compile("loggedOut");
 
 
 	private ContextAuth contextAuthenticator;
