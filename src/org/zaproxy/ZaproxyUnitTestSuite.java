@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.parosproxy.paros.core.scanner.KbUnitTest;
 import org.parosproxy.paros.core.scanner.UtilUnitTest;
+import org.zaproxy.zap.extension.auth.ContextAuthUnitTest;
 import org.zaproxy.zap.model.ContextUnitTest;
 import org.zaproxy.zap.spider.URLResolverUnitTest;
 
@@ -22,7 +23,7 @@ import ch.csnc.extension.util.NullComparatorUnitTest;
 @RunWith(Suite.class)
 @SuiteClasses({ URLResolverUnitTest.class, AliasKeyManagerUnitTest.class,
 		UtilUnitTest.class, EncodingUnitTest.class, KbUnitTest.class,
-		ContextUnitTest.class, NullComparatorUnitTest.class })
+		ContextUnitTest.class, NullComparatorUnitTest.class, ContextAuthUnitTest.class })
 public class ZaproxyUnitTestSuite {
 
 }
