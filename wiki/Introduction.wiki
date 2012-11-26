@@ -1,5 +1,5 @@
 #labels Featured
-The zaproxy-test project contains all developer's test code for the OWASP Zed Attack Proxy (ZAP) and its extensions. This includes (but is not limited to)
+The zaproxy-test project contains all developer's test code for the [https://code.google.com/p/zaproxy OWASP Zed Attack Proxy (ZAP)] and its extensions. This includes (but is not limited to)
   * Unit Tests for ensuring the intended behavior of individual classes
   * Integration Tests verifying correct interaction between classes or components
   * Supporting classes like builders, matchers etc.
