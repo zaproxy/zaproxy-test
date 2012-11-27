@@ -14,3 +14,4 @@ The following pages explain how to set up the zaproxy-test project and integrate
   * EclipseWorkspaceSetup
   * NetbeansWorkspaceSetup
   * IntellijWorkspaceSetup
+  * ViWorkspaceSetup ;-)
