@@ -1,3 +1,4 @@
+#labels Featured
 = Who should check out zaproxy-test? =
 
 Everyone working on zaproxy or zap-extensions! Whenever you program something in one of these projects you should also provide tests for your new or changed components, classes and methods!
