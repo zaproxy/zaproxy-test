@@ -1,0 +1,16 @@
+= Prerequisites =
+
+You have an Eclipse workspace (e.g. /_workspace_zap_) containing *both* of the following projects
+  * [http://code.google.com/p/zaproxy/source/checkout zaproxy]
+  * [http://code.google.com/p/zap-extensions/source/checkout zap-extensions]
+
+= Adding zaproxy-test to your workspace =
+
+  # Checkout _zaproxy-test_...
+   * ...[http://code.google.com/p/zaproxy-test/source/checkout via command-line] and import it as a new Java project into your existing ZAP workspace (via _File_ > _New_ > _Project..._ > _Java Project_)
+   * ...or via _SVN Repository Exploring_ perspective from Eclipse using https://zaproxy-test.googlecode.com/svn as _Repository root url_ and performing _Checkout..._ > _ Checkout as project configured using the New Project Wizard_ on the 'trunk' folder
+  # Add all testing libraries contained in _zaproxy-test/lib_ to the projects .classpath (via _Properties_ > _Java Build Path_ > _Libraries_ > _Add JARs..._)
+  # Add the projects _zaproxy_ and/or _zap-extensions_ to the .classpath of _zaproxy-test_ (via _Properties_ > _Java Build Path_ > _Projects_ > _Add..._)
+  # Export all libraries from the .classpaths of _zaproxy_ and _zap-extensions_ (except zap.jar) to make them available for _zaproxy-test_ (via _Properties_ > _Java Build Path_ > _Order and Export_)
+  # In _zaproxy-test_ order the dependencies as depicted in the screenshot below (via _Properties_ > _Java Build Path_ > _Order and Export_)
+  # All classes in _zaproxy-test_ should now compile without errors
