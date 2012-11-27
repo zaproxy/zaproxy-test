@@ -14,3 +14,5 @@ You have an Eclipse workspace (e.g. /_workspace_zap_) containing *both* of the f
   # Export all libraries from the .classpaths of _zaproxy_ and _zap-extensions_ (except zap.jar) to make them available for _zaproxy-test_ (via _Properties_ > _Java Build Path_ > _Order and Export_)
   # In _zaproxy-test_ order the dependencies as depicted in the screenshot below (via _Properties_ > _Java Build Path_ > _Order and Export_)
   # All classes in _zaproxy-test_ should now compile without errors
+
+http://zaproxy-test.googlecode.com/svn/wiki/images/zaproxy-test_build-path-order_eclipse.png
