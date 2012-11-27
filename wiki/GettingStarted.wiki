@@ -1,0 +1,15 @@
+= Who should check out zaproxy-test? =
+
+Everyone working on zaproxy or zap-extensions! Whenever you program something in one of these projects you should also provide tests for your new or changed components, classes and methods!
+
+== Who should *not* check out zaproxy-test? ==
+
+Pretty much everyone else, as zaproxy-test is not a standalone project of its own. It is the sub-project of Zed Attack Proxy containing all the test code.
+
+= How can I set-up zaproxy-test in my IDE? =
+
+The following pages explain how to set up the zaproxy-test project and integrate it into the ZAP workspace using your favorite IDE.
+
+  * EclipseWorkspaceSetup
+  * NetbeansWorkspaceSetup
+  * IntellijWorkspaceSetup
