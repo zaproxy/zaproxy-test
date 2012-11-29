@@ -1,0 +1,44 @@
+#labels Featured
+{{{
+TODO
+}}}
+
+= Tests =
+{{{
+TODO
+}}}
+
+== Unit Tests ==
+{{{
+TODO
+}}}
+
+== Integration Tests ==
+{{{
+TODO
+}}}
+
+= Test Suites =
+{{{
+TODO
+}}}
+
+= Test Libraries =
+{{{
+TODO
+}}}
+
+= Code Quality =
+  * All code in the zaproxy-test project should compile without any compiler warnings
+  * Only passing tests may be committed into SVN
+  * Unfinished or currently broken tests must be annotated with {{{@Ignore}}} in order to deactivate them during test suite execution
+  * All code should be written following the [http://www.cleancoders.com Clean Code] ideals
+
+{{{
+TODO
+}}}
+
+= Code Coverage =
+{{{
+TODO
+}}}
