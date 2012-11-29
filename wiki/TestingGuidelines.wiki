@@ -24,22 +24,30 @@ TODO
 }}}
 
 = Test Libraries =
-{{{
-TODO
-}}}
 
 == JUnit ==
-{{{
-TODO
-}}}
+
+JUnit is a simple framework to write repeatable tests. It is an instance of the xUnit architecture for unit testing frameworks.
+  * [http://junit.sourceforge.net/doc/cookbook/cookbook.htm Getting started with unit testing and JUnit4]
+
 == Mockito ==
-{{{
-TODO
-}}}
+
+The Mockito library enables mocks creation, verification and stubbing. With its clean & simple API it allows to write comprehensible and beautiful tests.
+  * [http://docs.mockito.googlecode.com/hg/latest/org/mockito/Mockito.html Getting started with Mockito]
+
 == Hamcrest ==
-{{{
-TODO
-}}}
+
+Hamcrest provides a library of matcher objects (also known as constraints or predicates) allowing 'match' rules to be defined declaratively, to be used inside JUnit tests.
+  * [http://code.google.com/p/hamcrest/wiki/Tutorial Hamcrest Tutorial]
+
+== Powermock ==
+
+PowerMock is a framework that extends Mockito with more powerful capabilities. It uses a custom classloader and bytecode manipulation to enable mocking of static methods, constructors, final classes and methods, private methods, removal of static initializers and more.
+  * [http://code.google.com/p/powermock/wiki/MockitoUsage13 Using Powermock with Mockito]
+
+*Powermock should only be used as a last resort* when dealing with static utility classes or legacy code that is impossible to bring into a cleaner & more test-friendly form
+  * Powermocks bytecode manipulation has a _dramatic_ impact on the ramp-up time for tests and test suites
+  * Powermock must never be introduced when refactorings or the introduction of Dependency Injection are able to mitigate testing difficulties
 
 = Code Quality =
   * All code in the zaproxy-test project should compile without any compiler warnings
