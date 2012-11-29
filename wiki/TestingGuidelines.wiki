@@ -42,7 +42,7 @@ Hamcrest provides a library of matcher objects (also known as constraints or pre
 
 == Powermock ==
 
-PowerMock is a framework that extends Mockito with more powerful capabilities. It uses a custom classloader and bytecode manipulation to enable mocking of static methods, constructors, final classes and methods, private methods, removal of static initializers and more.
+Powermock is a framework that extends Mockito with more powerful capabilities. It uses a custom classloader and bytecode manipulation to enable mocking of static methods, constructors, final classes and methods, private methods, removal of static initializers and more.
   * [http://code.google.com/p/powermock/wiki/MockitoUsage13 Using Powermock with Mockito]
 
 *Powermock should only be used as a last resort* when dealing with static utility classes or legacy code that is impossible to bring into a cleaner & more test-friendly form
