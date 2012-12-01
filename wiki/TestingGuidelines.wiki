@@ -1,7 +1,5 @@
 #labels Featured
-{{{
-TODO
-}}}
+Before working on zaproxy-test please read the following page carefully and use it as a guideline when writing tests for ZAP!
 
 = Tests =
 
@@ -24,9 +22,25 @@ TODO
 }}}
 
 = Test Suites =
-{{{
-TODO
-}}}
+
+Test suites bundle tests by their context and type. This allows for a dedicated execution of a subset of tests.
+
+== Top Level Test Suites ==
+
+The following test suites are pre-defined and make up the top level suites of all ZAP projects:
+  * {{{ZaproxyUnitTestSuite}}} and {{{ZapExtensionsUnitTestSuite}}} bundle all unit tests
+  * {{{ZaproxyIntegrationTestSuite}}} and {{{ZapExtensionsIntegrationTestSuite}}} bundle all integration tests
+  * {{{ZaproxyAllTestSuite}}} bundles {{{ZaproxyUnitTestSuite}}} and {{{ZaproxyIntegrationTestSuite}}} in order to execute all tests for the main zaproxy project at once
+  * {{{ZapExtensionsAllTestSuite}}} bundles {{{ZapExtensionsUnitTestSuite}}} and {{{ZapExtensionsIntegrationTestSuite}}} in order to execute all tests for the zap-extensions project at once
+  * {{{ZapAllTestSuite}}} bundles {{{ZaproxyAllTestSuite}}} and {{{ZapExtensionsAllTestSuite}}} in order to execute *all* tests at once
+
+== Individual Test Suites ==
+
+Instead of adding each individual test class to one of the above suites it might be useful to create some more specific test suites, i.e. for individual extensions (e.g. {{{AjaxSpiderExtensionUnitTestSuite}}}) or components ({{{DirBusterIntegrationTestSuite}}}).
+
+== Highlander Principle for Test (Suite) inclusion ==
+
+There can be only one suite that includes a given test case or another test suite. This means that it is not allowed to include a test in multiple test suites directly. Sticking to this rules makes sure that no tests are executed more than once when running one of the most top-level suites.
 
 = Test Libraries =
 
@@ -61,9 +75,19 @@ In order to make tests and test suites easily distiguishable from each other the
   * *Unit tests* have a class name matching {{{*UnitTest}}}. Examples:
    * {{{AliasKeyManagerUnitTest}}} containing tests for all the functionality offered by the {{{AliasKeyManager}}} class
    * {{{URLResolverRfc1808ExamplesUnitTest}}} containing special tests (regarding RFC1808 compliance in this case) for the {{{URLResolver}}} class in a dedicated test case
-  * *Integration Tests*
-  * *Test Methods*
-  * *Test Suites*
+  * *Integration Tests* have a class name matching {{{*IntegrationTest}}}. Examples: {{{TODO}}}
+  * *Test Methods* should be named as descriptive as possible and reflect what is expectated of the class for the given test. Examples:
+   * {{{shouldReturnNullWhenNoCertificatesAreFound()}}}
+   * {{{shouldReturnPrivateKeyFromKeyStore()}}}
+   * {{{shouldConvertDataIntoCorrectBase64String()}}}
+   * {{{shouldConsiderTwoNullValuesAsEqual()}}}
+  * The method names above can be read pretty easily and convey the expectation of the test quite fine. Here are some more counterintuitive or ugly examples which should be avoided:
+   * {{{testScenario1()}}}, {{{testScenario2()}}}, ...
+   * {{{nameOfMethodUnderTest_Exception()}}}, {{{nameOfMethodUnderTest_ReturnNull()}}}, ...
+   * {{{shouldWork()}}}, {{{shouldNotWork()}}}, ...
+  * *Test Suites* other than those pre-defined (see above) are useful to execute a specific set of tests all at once. They should be named according to the test context and test type. Examples:
+   * {{{AjaxSpiderExtensionUnitTestSuite}}}
+   * {{{DirBusterIntegrationTestSuite}}} etc.
 
 = Code Quality =
   * All code in the zaproxy-test project should compile without any compiler warnings
