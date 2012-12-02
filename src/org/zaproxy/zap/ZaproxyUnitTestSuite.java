@@ -1,4 +1,4 @@
-package org.zaproxy;
+package org.zaproxy.zap;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -25,6 +25,6 @@ import ch.csnc.extension.util.NullComparatorUnitTest;
 @SuiteClasses({ URLResolverUnitTest.class, AliasKeyManagerUnitTest.class,
 		UtilUnitTest.class, URLResolverRfc1808ExamplesUnitTest.class, EncodingUnitTest.class, KbUnitTest.class,
 		ContextUnitTest.class, NullComparatorUnitTest.class, ContextAuthUnitTest.class })
-public class ZaproxyUnitTestSuite {
+public final class ZaproxyUnitTestSuite {
 
 }
