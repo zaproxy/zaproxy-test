@@ -1,3 +1,4 @@
   * [Introduction Introduction]
   * [GettingStarted Getting Started]
-  * [EclipseWorkspaceSetup  Eclipse Workspace Setup]
+   * [EclipseWorkspaceSetup  Eclipse Workspace Setup]
+  * [TestingGuidelines Testing Guidelines]
