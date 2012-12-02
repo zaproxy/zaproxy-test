@@ -34,6 +34,10 @@ The following test suites are pre-defined and make up the top level suites of al
   * {{{ZapExtensionsAllTestSuite}}} bundles {{{ZapExtensionsUnitTestSuite}}} and {{{ZapExtensionsIntegrationTestSuite}}} in order to execute all tests for the zap-extensions project at once
   * {{{ZapAllTestSuite}}} bundles {{{ZaproxyAllTestSuite}}} and {{{ZapExtensionsAllTestSuite}}} in order to execute *all* tests at once
 
+This results in the following hierarchy of suites:
+
+http://zaproxy-test.googlecode.com/svn/wiki/images/zaproxy-test_suites-hierarchy.png
+
 == Individual Test Suites ==
 
 Instead of adding each individual test class to one of the above suites it might be useful to create some more specific test suites, i.e. for individual extensions (e.g. {{{AjaxSpiderExtensionUnitTestSuite}}}) or components ({{{DirBusterIntegrationTestSuite}}}).
