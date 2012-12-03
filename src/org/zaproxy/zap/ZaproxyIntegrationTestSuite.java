@@ -4,6 +4,9 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.parosproxy.paros.core.proxy.HttpProxyConnectionIntegrationTest;
+import org.parosproxy.paros.core.proxy.WebSocketsConnectionIntegrationTest;
+import org.zaproxy.clientapi.core.ReflectedXssDetectionIntegrationTest;
 
 /**
  * Suite for all integration tests of ZAP. Tests attached to this suite may
@@ -13,8 +16,10 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author bjoern.kimminich@gmx.de
  */
 @RunWith(Suite.class)
-@SuiteClasses({ })
-@Ignore
+@SuiteClasses({ ReflectedXssDetectionIntegrationTest.class,
+		HttpProxyConnectionIntegrationTest.class,
+		WebSocketsConnectionIntegrationTest.class,
+		DaemonWaveIntegrationTest.class })
 public final class ZaproxyIntegrationTestSuite {
 
 }
