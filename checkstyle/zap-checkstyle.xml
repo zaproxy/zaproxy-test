@@ -177,7 +177,7 @@
     </module>
   </module>
   <module name="SuppressionFilter">
-    <property name="file" value="${workspace_loc}/zaproxy-test/checkstyle/zap-checkstyle-suppressions.xml"/>
+    <property name="file" value="${config_loc}/zap-checkstyle-suppressions.xml"/>
   </module>
   <module name="SuppressWithNearbyCommentFilter"/>
   <module name="SuppressionCommentFilter"/>
