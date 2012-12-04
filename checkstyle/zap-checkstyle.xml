@@ -152,7 +152,7 @@
     </module>
     <module name="IllegalInstantiation">
       <property name="severity" value="info"/>
-      <property name="classes" value="java.lang.Boolean,java.lang.Integer,java.lang.Long,java.lang.Byte,java.lang.Short,java.lang.Character,java.lang.Double,java.lang.Float,java.lang.String"/>
+      <property name="classes" value="java.lang.Boolean,java.lang.Integer,java.lang.Long,java.lang.Byte,java.lang.Short,java.lang.Character,java.lang.Double,java.lang.Float"/>
     </module>
     <module name="SuppressWarnings">
       <property name="severity" value="info"/>
