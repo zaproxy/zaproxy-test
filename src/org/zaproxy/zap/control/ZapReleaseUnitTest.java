@@ -1,5 +1,6 @@
 package org.zaproxy.zap.control;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -10,40 +11,59 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class ZapReleaseUnitTest {
 
 	private static final String DEV_BUILD = "Dev Build";
-	private static final String VER_1_4_1 = "1.4.1";
-	private static final String VER_1_4_2 = "1.4.2";
-	private static final String VER_1_4_2_1 = "1.4.2.1";
-	private static final String VER_1_5_1 = "1.5.1";
 
 	@Test
 	public void testDevBuildLaterThan1_4_1() {
 		ZapRelease rel = new ZapRelease();
 		rel.setVersion(DEV_BUILD);
-		assertTrue(rel.isNewerThan(VER_1_4_1, false));
+		assertTrue(rel.isNewerThan("1.4.1", false));
 	}
 
 	@Test
 	public void test1_4_2LaterThan1_4_1() {
 		ZapRelease rel = new ZapRelease();
-		rel.setVersion(VER_1_4_2);
-		assertTrue(rel.isNewerThan(VER_1_4_1, false));
+		rel.setVersion("1.4.2");
+		assertTrue(rel.isNewerThan("1.4.1", false));
 	}
 
 	@Test
 	public void test1_5_1LaterThan1_4_2() {
 		ZapRelease rel = new ZapRelease();
-		rel.setVersion(VER_1_5_1);
-		assertTrue(rel.isNewerThan(VER_1_4_2, false));
+		rel.setVersion("1.5.1");
+		assertTrue(rel.isNewerThan("1.4.2", false));
 	}
 
 	@Test
 	public void test1_5_1LaterThan1_4_2_1() {
 		ZapRelease rel = new ZapRelease();
-		rel.setVersion(VER_1_5_1);
-		assertTrue(rel.isNewerThan(VER_1_4_2_1, false));
+		rel.setVersion("1.5.1");
+		assertTrue(rel.isNewerThan("1.4.2.1", false));
 	}
 
-	// TODO Implement more tests
-
-
+	@Test
+	public void testLots() {
+		// Imported from old CheckForUpdates code
+		assertFalse(new ZapRelease("1.3.4").isNewerThan("1.4", false));
+		assertFalse(new ZapRelease("1.3.4").isNewerThan("1.4", false));
+		assertFalse(new ZapRelease("1.3.4").isNewerThan("2.0", false));
+		assertFalse(new ZapRelease("1.4").isNewerThan("1.4.1", false));
+		assertFalse(new ZapRelease("1.4.1").isNewerThan("1.4.2", false));
+		assertFalse(new ZapRelease("1.4.2").isNewerThan("1.4.11", false));
+		assertFalse(new ZapRelease("1.4.alpha.1").isNewerThan("1.4", false));
+		assertFalse(new ZapRelease("1.4.alpha.1").isNewerThan("1.4.1", false));
+		assertFalse(new ZapRelease("1.4.beta.1").isNewerThan("1.5", false));
+		assertFalse(new ZapRelease("D-2012-08-01").isNewerThan("D-2012-08-02", true));
+		assertFalse(new ZapRelease("D-2012-01-01").isNewerThan("D-2013-10-10", true));
+		assertFalse(new ZapRelease("1.4").isNewerThan("1.4", false));
+		
+		assertTrue(new ZapRelease("1.4").isNewerThan("1.3.4", false));
+		assertTrue(new ZapRelease("1.4.2").isNewerThan("1.4.1", false));
+		assertTrue(new ZapRelease("1.4.20").isNewerThan("1.4.11", false));
+		assertTrue(new ZapRelease("1.4.alpha.1").isNewerThan("1.3.4", false));
+		// Dont support this right now
+		//assertTrue(new ZapRelease("1.4").isNewerThan("1.4.alpha.1", false));
+		assertTrue(new ZapRelease("Dev Build").isNewerThan("1.5", false));
+		assertTrue(new ZapRelease("D-2012-08-02").isNewerThan("D-2012-08-01", true));
+		assertTrue(new ZapRelease("D-2013-10-10").isNewerThan("D-2012-01-01", true));
+	}
 }
