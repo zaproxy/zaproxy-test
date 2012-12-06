@@ -5,6 +5,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.parosproxy.paros.core.scanner.KbUnitTest;
 import org.parosproxy.paros.core.scanner.UtilUnitTest;
+import org.zaproxy.zap.control.AddOnCollectionUnitTest;
+import org.zaproxy.zap.control.AddOnUnitTest;
+import org.zaproxy.zap.control.ZapReleaseUnitTest;
 import org.zaproxy.zap.extension.auth.ContextAuthUnitTest;
 import org.zaproxy.zap.extension.httppanel.view.hex.HttpPanelHexModelUnitTest;
 import org.zaproxy.zap.model.ContextUnitTest;
@@ -23,11 +26,22 @@ import ch.csnc.extension.util.NullComparatorUnitTest;
  * @author bjoern.kimminich@gmx.de
  */
 @RunWith(Suite.class)
-@SuiteClasses({ URLResolverUnitTest.class, AliasKeyManagerUnitTest.class,
-		UtilUnitTest.class, URLResolverRfc1808ExamplesUnitTest.class,
-		EncodingUnitTest.class, KbUnitTest.class, ContextUnitTest.class,
-		NullComparatorUnitTest.class, ContextAuthUnitTest.class,
-		HttpPanelHexModelUnitTest.class })
+@SuiteClasses({
+		// In alphabetical order
+		AddOnCollectionUnitTest.class,
+		AddOnUnitTest.class,
+		AliasKeyManagerUnitTest.class,
+		ContextAuthUnitTest.class,
+		ContextUnitTest.class,
+		EncodingUnitTest.class, 
+		HttpPanelHexModelUnitTest.class,
+		KbUnitTest.class, 
+		NullComparatorUnitTest.class, 
+		URLResolverRfc1808ExamplesUnitTest.class,
+		URLResolverUnitTest.class, 
+		UtilUnitTest.class,
+		ZapReleaseUnitTest.class
+		})
 public final class ZaproxyUnitTestSuite {
 
 }
