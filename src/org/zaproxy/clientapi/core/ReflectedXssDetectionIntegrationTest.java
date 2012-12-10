@@ -18,7 +18,6 @@
 package org.zaproxy.clientapi.core;
 
 import org.junit.Test;
-import org.zaproxy.clientapi.core.Alert;
 
 public class ReflectedXssDetectionIntegrationTest {
 

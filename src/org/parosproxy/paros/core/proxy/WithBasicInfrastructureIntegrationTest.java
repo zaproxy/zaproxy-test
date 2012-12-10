@@ -49,7 +49,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.parosproxy.paros.Constant;
-import org.parosproxy.paros.core.proxy.ProxyServer;
 import org.parosproxy.paros.model.Model;
 import org.parosproxy.paros.network.SSLConnector;
 import org.parosproxy.paros.security.SslCertificateService;

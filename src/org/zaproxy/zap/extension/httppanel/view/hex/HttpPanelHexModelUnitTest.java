@@ -20,9 +20,9 @@
 package org.zaproxy.zap.extension.httppanel.view.hex;
 
 import static org.junit.Assert.assertArrayEquals;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.zaproxy.zap.extension.httppanel.view.hex.HttpPanelHexModel;
 
 public class HttpPanelHexModelUnitTest {
 	
