@@ -19,7 +19,7 @@
  */
 package org.parosproxy.paros.core.proxy;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.net.HttpURLConnection;
 import java.net.URL;

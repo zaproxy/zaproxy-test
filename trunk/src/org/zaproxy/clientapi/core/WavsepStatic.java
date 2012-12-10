@@ -26,8 +26,6 @@ import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.URI;
-import org.zaproxy.clientapi.core.Alert;
-import org.zaproxy.clientapi.core.ClientApi;
 import org.zaproxy.clientapi.core.Alert.Reliability;
 import org.zaproxy.clientapi.core.Alert.Risk;
 

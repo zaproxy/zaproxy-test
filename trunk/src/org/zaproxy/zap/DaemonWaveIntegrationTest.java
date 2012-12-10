@@ -14,7 +14,6 @@ import java.util.List;
 import net.sf.json.JSONArray;
 
 import org.junit.Test;
-import org.zaproxy.zap.ZAP;
 
 public class DaemonWaveIntegrationTest {
 

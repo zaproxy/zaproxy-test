@@ -6,8 +6,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItemInArray;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.net.Socket;
 import java.security.Key;
@@ -33,7 +33,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * Unit test for {@link AliasKeyManager}
- * 
+ *
  * @author bjoern.kimminich@gmx.de
  */
 @RunWith(PowerMockRunner.class)
@@ -107,7 +107,7 @@ public class AliasKeyManagerUnitTest {
 	@Test
 	public void shouldReturnNullWhenNoCertificatesAreFound() throws Exception {
 		// Given
-		when(keyStoreSpi.engineGetCertificateChain(ALIAS)).thenReturn(null);
+		given(keyStoreSpi.engineGetCertificateChain(ALIAS)).willReturn(null);
 		aliasKeyManager = new AliasKeyManager(keyStore, ALIAS, PASSWORD);
 		// When
 		X509Certificate[] certificates = aliasKeyManager
@@ -122,7 +122,7 @@ public class AliasKeyManagerUnitTest {
 		// Given
 		Certificate[] originalCertificates = new Certificate[] {
 				mock(X509Certificate.class), mock(X509Certificate.class) };
-		when(keyStoreSpi.engineGetCertificateChain(ALIAS)).thenReturn(
+		given(keyStoreSpi.engineGetCertificateChain(ALIAS)).willReturn(
 				originalCertificates);
 		aliasKeyManager = new AliasKeyManager(keyStore, ALIAS, PASSWORD);
 		// When
@@ -138,7 +138,7 @@ public class AliasKeyManagerUnitTest {
 	public void shouldReturnNullAsCertificatesWhenExceptionOccursAccessingKeyStore()
 			throws Exception {
 		// Given
-		when(keyStoreSpi.engineGetCertificateChain(ALIAS)).thenThrow(
+		given(keyStoreSpi.engineGetCertificateChain(ALIAS)).willThrow(
 				KeyStoreException.class);
 		aliasKeyManager = new AliasKeyManager(keyStore, ALIAS, PASSWORD);
 		// When
@@ -153,8 +153,8 @@ public class AliasKeyManagerUnitTest {
 	public void shouldReturnNullAsKeyWhenExceptionOccursAccessingKeyStore()
 			throws Exception {
 		// Given
-		when(keyStoreSpi.engineGetKey(ALIAS, PASSWORD.toCharArray()))
-				.thenThrow(KeyStoreException.class,
+		given(keyStoreSpi.engineGetKey(ALIAS, PASSWORD.toCharArray()))
+				.willThrow(KeyStoreException.class,
 						NoSuchAlgorithmException.class,
 						UnrecoverableKeyException.class);
 		aliasKeyManager = new AliasKeyManager(keyStore, ALIAS, PASSWORD);
@@ -163,17 +163,17 @@ public class AliasKeyManagerUnitTest {
 		assertThat(aliasKeyManager.getPrivateKey(ALIAS), is(equalTo(null))); // NoSuchAlgorithmException
 		assertThat(aliasKeyManager.getPrivateKey(ALIAS), is(equalTo(null))); // UnrecoverableKeyException
 	}
-	
+
 	@Test
 	public void shouldReturnPrivateKeyFromKeyStore()
 			throws Exception {
 		// Given
 		Key originalKey = mock(PrivateKey.class);
-		when(keyStoreSpi.engineGetKey(ALIAS, PASSWORD.toCharArray()))
-		.thenReturn(originalKey);
+		given(keyStoreSpi.engineGetKey(ALIAS, PASSWORD.toCharArray()))
+		.willReturn(originalKey);
 		aliasKeyManager = new AliasKeyManager(keyStore, ALIAS, PASSWORD);
 		// When/Then
 		assertThat(aliasKeyManager.getPrivateKey(ALIAS), is(equalTo(originalKey)));
-	}	
+	}
 
 }

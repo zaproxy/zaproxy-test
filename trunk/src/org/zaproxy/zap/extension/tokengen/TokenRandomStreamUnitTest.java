@@ -1,11 +1,7 @@
 package org.zaproxy.zap.extension.tokengen;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +27,7 @@ public class TokenRandomStreamUnitTest {
 		// Given
 		stream.closeInputStream();
 		// When/Then
-		assertThat(stream.readByte(), is((byte)-1));
+		assertThat(stream.readByte(), is((byte) -1));
 		assertThat(stream.readInt(), is(-1));
 		assertThat(stream.readLong(), is(-1L));
 	}
