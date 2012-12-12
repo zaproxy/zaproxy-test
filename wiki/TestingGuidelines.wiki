@@ -5,21 +5,25 @@ Before working on zaproxy-test please read the following page carefully and use 
 
 == Unit Tests ==
 
-Unit tests test the smallest testable part of an application. In Java these are classes in most cases. For very big classes it might make sense to have an individual unit test for specific methods or usage scenarios of a class.
+Unit Tests test the smallest testable part of an application. In Java these are classes in most cases. For very big classes it might make sense to have an individual unit test for specific methods or usage scenarios of a class.
 
 Each test case is independent from the others. Substitutes for dependencies (like fakes, stubs or mock objects) can be used to assist testing a module in isolation.
 
-Unit tests have several characteristics, such as
+Unit Tests have several characteristics, such as
   * testing the behavior of a single class
   * no dependencies on external resources, databases, file systems, configuration settings or classpath entries
   * fast execution time
 
-If you have a test that does not fulfill those requirements you most likely have an *Integration Test* at hand instead.
+If you have a test that does not fulfill those requirements you most likely have an Integration Test at hand instead.
 
 == Integration Tests ==
-{{{
-TODO
-}}}
+
+Within an Integration Test software components are combined and tested as a group. These tests are typically not executed when programming with TDD. Instead they are mostly run in a automated nightly build or before packing a JAR for potential release. Therefore they can
+  * test the behavior of several classes together
+  * have dependencies on external resourses, databases, file systems, configuration settings and classpath entries
+  * take longer to execute
+
+Anyway each Integration test should still be as focussed and explicit as possible.
 
 = Test Suites =
 
@@ -93,15 +97,44 @@ In order to make tests and test suites easily distiguishable from each other the
    * {{{AjaxSpiderExtensionUnitTestSuite}}}
    * {{{DirBusterIntegrationTestSuite}}} etc.
 
+== Behavior Driven Development ==
+
+For improved clarity and readability Unit Tests and Integration Tests alike should use the [http://en.wikipedia.org/wiki/Behavior_Driven_Development Behavior Driven Development (BDD)] style of writing tests using {{{//given //when //then}}} comments as fundamental parts of all test methods.
+
+This makes the tests easily human-readable and explain the expectations and verifications of the test better than any other method allows to:
+
+=== Simple Example ===
+
+{{{
+public class UtilUnitTest {
+
+  @Test
+  public void shouldPauseForGivenDuration() {
+    // Given
+    int intendedPause = 500;
+
+    // When
+    long startTime = System.currentTimeMillis();
+    Util.sleep(intendedPause);
+    long endTime = System.currentTimeMillis();
+    double pause = endTime - startTime;
+
+    // Then
+    assertThat(pause, is(closeTo(intendedPause, 100d))); // allow 20% variance
+  }
+}
+}}}
+
+=== Example with mocks using BDDMockito ===
+{{{
+TODO
+}}}
+
 = Code Quality =
   * All code in the zaproxy-test project should compile without any compiler warnings
   * Only passing tests may be committed into SVN
   * Unfinished or currently broken tests must be annotated with {{{@Ignore}}} in order to deactivate them during test suite execution
   * All code should be written following the [http://www.cleancoders.com Clean Code] ideals
-
-{{{
-TODO
-}}}
 
 = Code Coverage =
 {{{
