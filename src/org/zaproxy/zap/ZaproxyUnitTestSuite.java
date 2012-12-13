@@ -14,6 +14,8 @@ import org.zaproxy.zap.model.ContextUnitTest;
 import org.zaproxy.zap.spider.URLResolverRfc1808ExamplesUnitTest;
 import org.zaproxy.zap.spider.URLResolverUnitTest;
 
+import com.sittinglittleduck.DirBuster.EasySSLProtocolSocketFactoryUnitTest;
+
 import ch.csnc.extension.httpclient.AliasKeyManagerUnitTest;
 import ch.csnc.extension.util.EncodingUnitTest;
 import ch.csnc.extension.util.NullComparatorUnitTest;
@@ -33,14 +35,15 @@ import ch.csnc.extension.util.NullComparatorUnitTest;
 		AliasKeyManagerUnitTest.class,
 		ContextAuthUnitTest.class,
 		ContextUnitTest.class,
-		EncodingUnitTest.class, 
+		EncodingUnitTest.class,
 		HttpPanelHexModelUnitTest.class,
-		KbUnitTest.class, 
-		NullComparatorUnitTest.class, 
+		KbUnitTest.class,
+		NullComparatorUnitTest.class,
 		URLResolverRfc1808ExamplesUnitTest.class,
-		URLResolverUnitTest.class, 
+		URLResolverUnitTest.class,
 		UtilUnitTest.class,
-		ZapReleaseUnitTest.class
+		ZapReleaseUnitTest.class,
+		EasySSLProtocolSocketFactoryUnitTest.class
 		})
 public final class ZaproxyUnitTestSuite {
 
