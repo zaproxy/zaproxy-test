@@ -18,6 +18,7 @@ import com.sittinglittleduck.DirBuster.EasySSLProtocolSocketFactoryUnitTest;
 
 import ch.csnc.extension.httpclient.AliasCertificateUnitTest;
 import ch.csnc.extension.httpclient.AliasKeyManagerUnitTest;
+import ch.csnc.extension.httpclient.SSLContextManagerUnitTest;
 import ch.csnc.extension.util.EncodingUnitTest;
 import ch.csnc.extension.util.NullComparatorUnitTest;
 
@@ -45,7 +46,8 @@ import ch.csnc.extension.util.NullComparatorUnitTest;
 		UtilUnitTest.class,
 		ZapReleaseUnitTest.class,
 		EasySSLProtocolSocketFactoryUnitTest.class,
-		AliasCertificateUnitTest.class
+		AliasCertificateUnitTest.class,
+		SSLContextManagerUnitTest.class
 		})
 public final class ZaproxyUnitTestSuite {
 
