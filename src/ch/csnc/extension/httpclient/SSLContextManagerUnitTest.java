@@ -19,31 +19,31 @@ public class SSLContextManagerUnitTest {
 	@Test
 	public void shouldReturnAvailabilityOfPKCS11Provider() {
 		// Given
-		boolean pkcs11ProdivderAvailable = true;
+		boolean pkcs11ProviderAvailable = true;
 		try {
 			Class.forName("sun.security.pkcs11.SunPKCS11");
 		} catch (ClassNotFoundException e) {
-			pkcs11ProdivderAvailable = false;			
+			pkcs11ProviderAvailable = false;			
 		}
 		// When
 		boolean result = sslContextManager.isProviderAvailable("PKCS11");
 		// Then
-		assertThat(result, is(equalTo(pkcs11ProdivderAvailable)));
+		assertThat(result, is(equalTo(pkcs11ProviderAvailable)));
 	}
 	
 	@Test
 	public void shouldReturnAvailabilityOfMsksProvider() {
 		// Given
-		boolean msks11ProdivderAvailable = true;
+		boolean msks11ProviderAvailable = true;
 		try {
 			Class.forName("se.assembla.jce.provider.ms.MSProvider");
 		} catch (ClassNotFoundException e) {
-			msks11ProdivderAvailable = false;			
+			msks11ProviderAvailable = false;			
 		}
 		// When
 		boolean result = sslContextManager.isProviderAvailable("msks");
 		// Then
-		assertThat(result, is(equalTo(msks11ProdivderAvailable)));
+		assertThat(result, is(equalTo(msks11ProviderAvailable)));
 	}
 	
 	@Test
