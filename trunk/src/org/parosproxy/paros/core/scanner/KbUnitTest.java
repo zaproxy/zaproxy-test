@@ -98,7 +98,7 @@ public class KbUnitTest {
 	}
 
 	@Test
-	public void shouldReturnNullWhenRetrievingNonBooleanValueAsBoolean() {
+	public void shouldReturnFalseWhenRetrievingNonBooleanValueAsBoolean() {
 		// Given/When
 		knowledgeBase.add(TEST_KEY, TEST_OBJECT_1);
 		// Then
