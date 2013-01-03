@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.parosproxy.paros.core.scanner.KbUnitTest;
 import org.parosproxy.paros.core.scanner.UtilUnitTest;
+import org.parosproxy.paros.model.FileCopierTest;
 import org.zaproxy.zap.control.AddOnCollectionUnitTest;
 import org.zaproxy.zap.control.AddOnUnitTest;
 import org.zaproxy.zap.control.ZapReleaseUnitTest;
@@ -47,7 +48,8 @@ import ch.csnc.extension.util.NullComparatorUnitTest;
 		ZapReleaseUnitTest.class,
 		EasySSLProtocolSocketFactoryUnitTest.class,
 		AliasCertificateUnitTest.class,
-		SSLContextManagerUnitTest.class
+		SSLContextManagerUnitTest.class,
+		FileCopierTest.class
 		})
 public final class ZaproxyUnitTestSuite {
 
