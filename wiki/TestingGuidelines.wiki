@@ -142,7 +142,7 @@ Code Coverage is a measure used in software testing. It describes the degree t
 
 Code Coverage in ZAP should be continuously increased with the final goal of *100%* coverage!
 
-The following blog posts from Robert C. Martin explain quite nicely why setting goals of less than 100% does not make any sense, as long as you understand that 100% will always be an asymptotic goal. You just should stop testing just because you passed an artificially defined coverage threshold of 50%, 70%, 80%, 90% or 95%.
+The following blog posts from Robert C. Martin explain quite nicely why setting goals of less than 100% does not make any sense, as long as you understand that 100% will always be an asymptotic goal. You just should not stop testing just because you passed an artificially defined coverage threshold of 50%, 70%, 80%, 90% or 95%.
 
   * Video 1: http://cleancoder.posterous.com/100-test-coverage
   * Video 2: http://cleancoder.posterous.com/100-code-coverage-again-3984
