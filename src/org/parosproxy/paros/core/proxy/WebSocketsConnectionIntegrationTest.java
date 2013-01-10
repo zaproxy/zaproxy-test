@@ -246,7 +246,6 @@ public class WebSocketsConnectionIntegrationTest extends WithBasicInfrastructure
 //	}
 
 	private void properlyCloseWebSocket(Socket socket) throws IOException {
-		socket.setTcpNoDelay(true);
 		assertTrue("Retrieved SocketChannel should not be null.", socket != null);
 
 		byte[] maskedClose = {(byte) 0x88, (byte) 0x82, 0x46, 0x59, (byte) 0xdc, 0x4a, 0x45, (byte) 0xb1};
@@ -265,10 +264,10 @@ public class WebSocketsConnectionIntegrationTest extends WithBasicInfrastructure
 	 * @throws IOException
 	 */
 	private void assertWorkingWebSocket(Socket socket) throws IOException {
-		socket.setSoTimeout(500);
-		socket.setTcpNoDelay(true);
-		socket.setKeepAlive(true);
 		assertTrue("Retrieved SocketChannel should not be null.", socket != null);
+        socket.setSoTimeout(500);
+        socket.setTcpNoDelay(true);
+        socket.setKeepAlive(true);
 
 		byte[] maskedHelloMessage = {(byte) 0x81, (byte) 0x85, 0x37, (byte) 0xfa, 0x21, 0x3d, 0x7f, (byte) 0x9f, 0x4d, 0x51, 0x58};
 		byte[] unmaskedHelloMessage = {(byte) 0x81, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f};
