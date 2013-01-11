@@ -3,7 +3,6 @@ package org.zaproxy.zap.extension;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.zaproxy.zap.extension.sse.SseExtensionUnitTestSuite;
 
 /**
  * Suite for all unit tests of ZAP Extensions. Tests attached to this suite must
@@ -13,7 +12,7 @@ import org.zaproxy.zap.extension.sse.SseExtensionUnitTestSuite;
  * @author bjoern.kimminich@gmx.de
  */
 @RunWith(Suite.class)
-@SuiteClasses({SseExtensionUnitTestSuite.class})
+@SuiteClasses({})
 public final class ZapExtensionsUnitTestSuite {
 
 }
