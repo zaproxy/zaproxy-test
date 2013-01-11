@@ -4,6 +4,7 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.zaproxy.zap.extension.sse.SseExtensionUnitTestSuite;
 
 /**
  * Suite for all integration tests of ZAP Extensions. Tests attached to this
@@ -13,7 +14,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author bjoern.kimminich@gmx.de
  */
 @RunWith(Suite.class)
-@SuiteClasses({})
+@SuiteClasses({SseExtensionUnitTestSuite.class})
 @Ignore
 public final class ZapExtensionsIntegrationTestSuite {
 
