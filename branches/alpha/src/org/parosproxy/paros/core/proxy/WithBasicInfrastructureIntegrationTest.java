@@ -55,7 +55,7 @@ import org.parosproxy.paros.security.SslCertificateService;
 import org.parosproxy.paros.security.SslCertificateServiceImpl;
 
 /**
- * Provides basic infrastructure. See {@link WebSocketsConnectionIntegrationTest} for an example.
+ * Provides basic infrastructure.
  */
 public abstract class WithBasicInfrastructureIntegrationTest {
 

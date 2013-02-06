@@ -4,7 +4,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.parosproxy.paros.core.proxy.HttpProxyConnectionIntegrationTest;
-import org.parosproxy.paros.core.proxy.WebSocketsConnectionIntegrationTest;
 import org.zaproxy.clientapi.core.ReflectedXssDetectionIntegrationTest;
 
 /**
@@ -17,7 +16,6 @@ import org.zaproxy.clientapi.core.ReflectedXssDetectionIntegrationTest;
 @RunWith(Suite.class)
 @SuiteClasses({ ReflectedXssDetectionIntegrationTest.class,
 		HttpProxyConnectionIntegrationTest.class,
-		WebSocketsConnectionIntegrationTest.class,
 		DaemonWaveIntegrationTest.class })
 public final class ZaproxyIntegrationTestSuite {
 
