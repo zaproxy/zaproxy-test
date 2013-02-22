@@ -1,0 +1,31 @@
+<project name="zap" default="test" basedir=".">
+	<description>Run the ZAP JUnit tests.</description>
+	<!-- set global properties for this build -->
+	<property name="zaproxy" location="../zaproxy" />
+	
+	<target name="test">
+        <!-- Run the JUnit tests -->
+        <junit printsummary="yes">
+            <classpath>
+        		<fileset dir="lib">
+        			<include name="*.jar" />
+        		</fileset>
+        		<fileset dir="${zaproxy}/lib">
+        			<include name="*.jar" />
+        		</fileset>
+        		<fileset dir="${zaproxy}/build/zap">
+        			<include name="zap.jar" />
+        		</fileset>
+        		<pathelement location="bin"/>
+            </classpath>
+            <formatter type="plain"/>
+            <formatter type="xml"/>
+            <batchtest fork="yes" todir="results">
+                <fileset dir="src">
+                    <include name="org/zaproxy/ZapAllTestSuite.java"/>
+                </fileset>
+            </batchtest>
+		</junit>
+	</target>
+
+</project>
