@@ -10,7 +10,6 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
 
 import org.apache.commons.httpclient.params.HttpConnectionParams;
 import org.junit.AfterClass;
@@ -56,13 +55,17 @@ public class EasySSLProtocolSocketFactoryUnitTest {
 		assertThat(sslSocket.getPort(), is(equalTo(port)));
 	}
 
-	@Test(expected = UnknownHostException.class)
+	@Test(expected = java.net.ConnectException.class)
 	public void shouldFailCreatingSocketForUnknownHost() throws Exception {
 		// Given
 		String unknownHost = "localhorst";
+		InetAddress localAddress = InetAddress.getLoopbackAddress();
+		int localPort = 28080;
+		HttpConnectionParams params = new HttpConnectionParams();
+		params.setConnectionTimeout(60000);
 		// When
-		socketFactory.createSocket(unknownHost, 18080);
-		// Then = UnknownHostException
+		socketFactory.createSocket(unknownHost, 18080, localAddress, localPort, params);
+		// Then = ConnectionException
 	}
 
 	@Test(expected = ConnectException.class)
