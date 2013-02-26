@@ -55,7 +55,8 @@ public class EasySSLProtocolSocketFactoryUnitTest {
 		assertThat(sslSocket.getPort(), is(equalTo(port)));
 	}
 
-	@Test(expected = java.net.ConnectException.class)
+	// Note that on some platforms this gives a ConnectionException while on others it give a UnknownHostException 
+	@Test(expected = java.io.IOException.class)
 	public void shouldFailCreatingSocketForUnknownHost() throws Exception {
 		// Given
 		String unknownHost = "localhorst";
@@ -65,7 +66,7 @@ public class EasySSLProtocolSocketFactoryUnitTest {
 		params.setConnectionTimeout(60000);
 		// When
 		socketFactory.createSocket(unknownHost, 18080, localAddress, localPort, params);
-		// Then = ConnectionException
+		// Then = IOException
 	}
 
 	@Test(expected = ConnectException.class)
