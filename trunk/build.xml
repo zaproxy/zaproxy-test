@@ -1,9 +1,46 @@
 <project name="zap" default="test" basedir=".">
 	<description>Run the ZAP JUnit tests.</description>
 	<!-- set global properties for this build -->
+    <property name="build" location="build" />
+    <property name="src" location="src" />
+    <property name="src.version" value="1.7" />
 	<property name="zaproxy" location="../zaproxy" />
+	<property name="zaproxy-extensions" location="../zap-extensions" />
 	
-	<target name="test">
+    <target name="init">
+        <mkdir dir="${build}" />
+    </target>
+
+    <target name="compile" depends="init" description="compile the source ">
+        <echo message="Compiling the source..." />
+
+        <!-- Compile with debug information if the property "javac.debug" is set to true -->
+        <local name="debug" />
+        <condition property="debug" value="true" else="false">
+            <istrue value="${javac.debug}" />
+        </condition>
+
+    	<!-- Compile the java code from ${src} into ${build} -->
+        <!--javac srcdir="${src}" destdir="${build}" classpath="zap.jar"/-->
+        <javac srcdir="${src}" destdir="${build}" source="${src.version}" target="${src.version}" includeantruntime="false" debug="${debug}">
+            <classpath>
+                <fileset dir="lib">
+                    <include name="*.jar" />
+                </fileset>
+        		<fileset dir="${zaproxy}/lib">
+        			<include name="*.jar" />
+        			<exclude name="ant.jar" />
+        		</fileset>
+        		<fileset dir="${zaproxy}/build/zap">
+        			<include name="zap.jar" />
+        		</fileset>
+        		<pathelement location="${zaproxy-extensions}/build/build"/>
+            </classpath>
+        </javac>
+
+    </target>
+
+	<target name="test" depends="compile">
         <!-- Run the JUnit tests -->
         <junit printsummary="yes">
             <classpath>
@@ -12,6 +49,7 @@
         		</fileset>
         		<fileset dir="${zaproxy}/lib">
         			<include name="*.jar" />
+        			<exclude name="ant.jar" />
         		</fileset>
         		<fileset dir="${zaproxy}/build/zap">
         			<include name="zap.jar" />
