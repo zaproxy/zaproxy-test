@@ -14,6 +14,7 @@ import org.zaproxy.zap.extension.httppanel.view.hex.HttpPanelHexModelUnitTest;
 import org.zaproxy.zap.model.ContextUnitTest;
 import org.zaproxy.zap.spider.URLResolverRfc1808ExamplesUnitTest;
 import org.zaproxy.zap.spider.URLResolverUnitTest;
+import org.zaproxy.zap.view.LayoutHelperUnitTest;
 
 import com.sittinglittleduck.DirBuster.EasySSLProtocolSocketFactoryUnitTest;
 
@@ -49,7 +50,8 @@ import ch.csnc.extension.util.NullComparatorUnitTest;
 		EasySSLProtocolSocketFactoryUnitTest.class,
 		AliasCertificateUnitTest.class,
 		SSLContextManagerUnitTest.class,
-		FileCopierTest.class
+		FileCopierTest.class,
+		LayoutHelperUnitTest.class
 		})
 public final class ZaproxyUnitTestSuite {
 
