@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.parosproxy.paros.core.scanner.KbUnitTest;
 import org.parosproxy.paros.core.scanner.UtilUnitTest;
+import org.parosproxy.paros.core.scanner.VariantODataUnitTest;
 import org.parosproxy.paros.model.FileCopierTest;
 import org.zaproxy.zap.control.AddOnCollectionUnitTest;
 import org.zaproxy.zap.control.AddOnUnitTest;
@@ -12,18 +13,19 @@ import org.zaproxy.zap.control.ZapReleaseUnitTest;
 import org.zaproxy.zap.extension.auth.ContextAuthUnitTest;
 import org.zaproxy.zap.extension.httppanel.view.hex.HttpPanelHexModelUnitTest;
 import org.zaproxy.zap.model.ContextUnitTest;
+import org.zaproxy.zap.spider.URLCanonicalizerUnitTest;
 import org.zaproxy.zap.spider.URLResolverRfc1808ExamplesUnitTest;
 import org.zaproxy.zap.spider.URLResolverUnitTest;
 import org.zaproxy.zap.utils.ByteBuilderUnitTest;
 import org.zaproxy.zap.view.LayoutHelperUnitTest;
-
-import com.sittinglittleduck.DirBuster.EasySSLProtocolSocketFactoryUnitTest;
 
 import ch.csnc.extension.httpclient.AliasCertificateUnitTest;
 import ch.csnc.extension.httpclient.AliasKeyManagerUnitTest;
 import ch.csnc.extension.httpclient.SSLContextManagerUnitTest;
 import ch.csnc.extension.util.EncodingUnitTest;
 import ch.csnc.extension.util.NullComparatorUnitTest;
+
+import com.sittinglittleduck.DirBuster.EasySSLProtocolSocketFactoryUnitTest;
 
 /**
  * Suite for all unit tests of ZAP. Tests attached to this suite must run
@@ -44,9 +46,11 @@ import ch.csnc.extension.util.NullComparatorUnitTest;
 		HttpPanelHexModelUnitTest.class,
 		KbUnitTest.class,
 		NullComparatorUnitTest.class,
+		URLCanonicalizerUnitTest.class,
 		URLResolverRfc1808ExamplesUnitTest.class,
 		URLResolverUnitTest.class,
 		UtilUnitTest.class,
+		VariantODataUnitTest.class,
 		ZapReleaseUnitTest.class,
 		EasySSLProtocolSocketFactoryUnitTest.class,
 		AliasCertificateUnitTest.class,
