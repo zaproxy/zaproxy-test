@@ -17,6 +17,8 @@ import org.zaproxy.zap.spider.URLCanonicalizerUnitTest;
 import org.zaproxy.zap.spider.URLResolverRfc1808ExamplesUnitTest;
 import org.zaproxy.zap.spider.URLResolverUnitTest;
 import org.zaproxy.zap.utils.ByteBuilderUnitTest;
+import org.zaproxy.zap.utils.XMLStringUtil;
+import org.zaproxy.zap.utils.XMLStringUtilUnitTest;
 import org.zaproxy.zap.view.LayoutHelperUnitTest;
 
 import ch.csnc.extension.httpclient.AliasCertificateUnitTest;
@@ -39,25 +41,26 @@ import com.sittinglittleduck.DirBuster.EasySSLProtocolSocketFactoryUnitTest;
 		// In alphabetical order
 		AddOnCollectionUnitTest.class,
 		AddOnUnitTest.class,
+		AliasCertificateUnitTest.class,
 		AliasKeyManagerUnitTest.class,
+		ByteBuilderUnitTest.class,
 		ContextAuthUnitTest.class,
 		ContextUnitTest.class,
+		EasySSLProtocolSocketFactoryUnitTest.class,
 		EncodingUnitTest.class,
+		FileCopierTest.class,
 		HttpPanelHexModelUnitTest.class,
 		KbUnitTest.class,
+		LayoutHelperUnitTest.class,
 		NullComparatorUnitTest.class,
+		SSLContextManagerUnitTest.class,
 		URLCanonicalizerUnitTest.class,
 		URLResolverRfc1808ExamplesUnitTest.class,
 		URLResolverUnitTest.class,
 		UtilUnitTest.class,
 		VariantODataUnitTest.class,
-		ZapReleaseUnitTest.class,
-		EasySSLProtocolSocketFactoryUnitTest.class,
-		AliasCertificateUnitTest.class,
-		SSLContextManagerUnitTest.class,
-		FileCopierTest.class,
-		LayoutHelperUnitTest.class,
-		ByteBuilderUnitTest.class
+		XMLStringUtilUnitTest.class,
+		ZapReleaseUnitTest.class
 		})
 public final class ZaproxyUnitTestSuite {
 
