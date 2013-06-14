@@ -49,11 +49,16 @@
         		</fileset>
         		<fileset dir="${zaproxy}/lib">
         			<include name="*.jar" />
-        			<exclude name="ant.jar" />
+        			<exclude name="ant*.jar" />
+        			<exclude name="junit*.jar" />
         		</fileset>
         		<fileset dir="${zaproxy}/build/zap">
         			<include name="zap.jar" />
+        			<exclude name="ant*.jar" />
         		</fileset>
+            	
+        		<pathelement location="${zaproxy-extensions}/bin"/>		<!-- When running in Eclipse -->
+        		<pathelement location="${zaproxy-extensions}/build"/>	<!-- When running on build server -->
         		<pathelement location="bin"/>		<!-- When running in Eclipse -->
         		<pathelement location="build"/>		<!-- When running on build server -->
             </classpath>
@@ -67,4 +72,75 @@
 		</junit>
 	</target>
 
+	<target name="bodgeittest" depends="compile">
+		
+		<!-- Start ZAP -->
+		<antcall target="startZapDaemon" />
+		<!--
+		<antcall target="startZapDaemon" />
+		-->
+
+        <!-- Run the Bodgeit JUnit tests -->
+        <junit printsummary="yes" haltonerror="on">
+            <classpath>
+        		<fileset dir="lib">
+        			<include name="*.jar" />
+        		</fileset>
+        		<fileset dir="${zaproxy}/lib">
+        			<include name="*.jar" />
+        			<exclude name="junit*.jar" />
+        			<exclude name="mockito*.jar" />
+        		</fileset>
+        		<fileset dir="${zaproxy}/build/zap">
+        			<include name="zap.jar" />
+        		</fileset>
+        		<pathelement location="bin"/>		<!-- When running in Eclipse -->
+        		<pathelement location="build"/>		<!-- When running on build server -->
+            </classpath>
+            <formatter type="plain"/>
+            <formatter type="xml"/>
+            <batchtest fork="yes" todir="results">
+                <fileset dir="src">
+                    <include name="org/zaproxy/zap/BodgeItIntegrationTest.java"/>
+                </fileset>
+            </batchtest>
+		</junit>
+
+		<!-- Stop ZAP -->
+	    <!--stopZapTask zapAddress="${zapaddr}" zapPort="${zapport}"/-->
+
+	</target>
+
+	<property name="zapaddr" value="localhost" />
+	<property name="zapport" value="8090" />
+	<property name="zapdir" value="/home/simon/tools/zap" />
+	
+	<target name="startZap">
+		<java classname="org.zaproxy.zap.ZAP" fork="true" spawn="true" dir="${zapdir}">
+			<arg value="-port ${zapport}"/>
+			<classpath>
+				<pathelement location="${zapdir}/zap.jar"/>
+			</classpath>
+		</java>
+		<!-- Give ZAP a chance to start -->
+		<sleep seconds="20"/>
+	</target>
+
+	<target name="startZapDaemon">
+		<java classname="org.zaproxy.zap.ZAP" fork="true" spawn="true" dir="${zapdir}">
+			<arg value="-daemon"/>
+			<arg value="-port ${zapport}"/>
+			<classpath>
+				<pathelement location="${zapdir}/zap.jar"/>
+			</classpath>
+		</java>
+		<!-- Give ZAP a chance to start -->
+		<sleep seconds="20"/>
+	</target>
+
+	<target name="stopZap">
+	    <stopZapTask zapAddress="${zapaddr}" zapPort="${zapport}" debug="true"/>
+	</target>
+
+	
 </project>
