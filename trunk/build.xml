@@ -58,7 +58,7 @@
         		</fileset>
             	
         		<pathelement location="${zaproxy-extensions}/bin"/>		<!-- When running in Eclipse -->
-        		<pathelement location="${zaproxy-extensions}/build"/>	<!-- When running on build server -->
+        		<pathelement location="${zaproxy-extensions}/build/build"/>	<!-- When running on build server -->
         		<pathelement location="bin"/>		<!-- When running in Eclipse -->
         		<pathelement location="build"/>		<!-- When running on build server -->
             </classpath>
