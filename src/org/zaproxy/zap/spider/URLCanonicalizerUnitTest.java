@@ -1,5 +1,6 @@
 package org.zaproxy.zap.spider;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -17,7 +18,87 @@ import org.zaproxy.zap.spider.SpiderParam.HandleParametersOption;
  */
 public class URLCanonicalizerUnitTest {
 
-	
+    @Test
+    public void shouldReturnPercentEncodedUriWhenCleaningParametersIn_USE_ALL_mode() throws URIException {
+        // Given
+        URI uri = new URI("https://example.com:80/path/%C3%A1/?par%C3%A2m=v%C3%A3lue", true);
+        // When
+        String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
+                uri,
+                SpiderParam.HandleParametersOption.USE_ALL,
+                false);
+        // Then
+        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/%C3%A1/?par%C3%A2m=v%C3%A3lue")));
+    }
+
+    @Test
+    public void shouldReturnPercentEncodedUriWhenCleaningParametersIn_IGNORE_VALUE_mode() throws URIException {
+        // Given
+        URI uri = new URI("https://example.com:80/path/%C3%A1/?par%C3%A2m=v%C3%A3lue1", true);
+        // When
+        String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
+                uri,
+                SpiderParam.HandleParametersOption.IGNORE_VALUE,
+                false);
+        // Then
+        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/%C3%A1/?par%C3%A2m")));
+    }
+
+    @Test
+    public void shouldReturnPercentEncodedUriWhenCleaningParametersIn_IGNORE_COMPLETELY_mode() throws URIException {
+        // Given
+        URI uri = new URI("https://example.com:80/path/%C3%A1/?par%C3%A2m=v%C3%A3lue", true);
+        // When
+        String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
+                uri,
+                SpiderParam.HandleParametersOption.IGNORE_COMPLETELY,
+                false);
+        // Then
+        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/%C3%A1/")));
+    }
+
+    @Test
+    public void shouldCorrectlyParseQueryParamNamesAndValuesWithAmpersandsAndEqualsWhenCleaningParametersIn_USE_ALL_mode()
+            throws URIException {
+        // Given
+        URI uri = new URI("https://example.com:80/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2", true);
+        // When
+        String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
+                uri,
+                SpiderParam.HandleParametersOption.USE_ALL,
+                false);
+        // Then
+        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2")));
+    }
+
+    @Test
+    public void shouldCorrectlyParseQueryParamNamesAndValuesWithAmpersandsAndEqualsWhenCleaningParametersIn_IGNORE_VALUE_mode()
+            throws URIException {
+        // Given
+        URI uri = new URI("https://example.com:80/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2", true);
+        // When
+        String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
+                uri,
+                SpiderParam.HandleParametersOption.IGNORE_VALUE,
+                false);
+        // Then
+        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/?par%26am2&par%3Dam1")));
+    }
+
+    @Test
+    public void shouldCorrectlyParseQueryParamNamesAndValuesWithAmpersandsAndEqualsWhenCleaningParametersIn_IGNORE_COMPLETELY_mode()
+            throws URIException {
+        // Given
+        URI uri = new URI("https://example.com:80/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2", true);
+        // When
+        String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
+                uri,
+                SpiderParam.HandleParametersOption.IGNORE_COMPLETELY,
+                false);
+        // Then
+        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/")));
+    }
+
 	// Test of the legacy behavior
 	
 	@Test
