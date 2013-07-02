@@ -6,6 +6,9 @@ import static org.junit.Assert.assertThat;
 
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
+import org.apache.log4j.Logger;
+import org.apache.log4j.varia.NullAppender;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.zaproxy.zap.spider.SpiderParam.HandleParametersOption;
 
@@ -18,85 +21,110 @@ import org.zaproxy.zap.spider.SpiderParam.HandleParametersOption;
  */
 public class URLCanonicalizerUnitTest {
 
+    @BeforeClass
+    public static void suppressLogging() {
+        Logger.getLogger(URLCanonicalizer.class).addAppender(new NullAppender());
+    }
+
+    @Test
+    public void shouldReturnCanonicalUriWithPercentEncodedPath() throws URIException {
+        // Given
+        String uri = new URI("http://example.com/path/%C3%A1/", true).toString();
+        // When
+        String canonicalizedUri = URLCanonicalizer.getCanonicalURL(uri);
+        // Then
+        assertThat(canonicalizedUri, is(equalTo("http://example.com/path/%C3%A1/")));
+    }
+
+    @Test
+    public void shouldReturnCanonicalUriWithPercentEncodedQuery() throws URIException {
+        // Given
+        String uri = new URI("http://example.com/path/?par%C3%A2m=v%C3%A3lue", true).toString();
+        // When
+        String canonicalizedUri = URLCanonicalizer.getCanonicalURL(uri);
+        // Then
+        assertThat(canonicalizedUri, is(equalTo("http://example.com/path/?par%C3%A2m=v%C3%A3lue")));
+    }
+
     @Test
     public void shouldReturnPercentEncodedUriWhenCleaningParametersIn_USE_ALL_mode() throws URIException {
         // Given
-        URI uri = new URI("https://example.com:80/path/%C3%A1/?par%C3%A2m=v%C3%A3lue", true);
+        URI uri = new URI("http://example.com/path/%C3%A1/?par%C3%A2m=v%C3%A3lue", true);
         // When
         String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
                 uri,
                 SpiderParam.HandleParametersOption.USE_ALL,
                 false);
         // Then
-        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/%C3%A1/?par%C3%A2m=v%C3%A3lue")));
+        assertThat(cleanedUri, is(equalTo("http://example.com/path/%C3%A1/?par%C3%A2m=v%C3%A3lue")));
     }
 
     @Test
     public void shouldReturnPercentEncodedUriWhenCleaningParametersIn_IGNORE_VALUE_mode() throws URIException {
         // Given
-        URI uri = new URI("https://example.com:80/path/%C3%A1/?par%C3%A2m=v%C3%A3lue1", true);
+        URI uri = new URI("http://example.com/path/%C3%A1/?par%C3%A2m=v%C3%A3lue1", true);
         // When
         String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
                 uri,
                 SpiderParam.HandleParametersOption.IGNORE_VALUE,
                 false);
         // Then
-        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/%C3%A1/?par%C3%A2m")));
+        assertThat(cleanedUri, is(equalTo("http://example.com/path/%C3%A1/?par%C3%A2m")));
     }
 
     @Test
     public void shouldReturnPercentEncodedUriWhenCleaningParametersIn_IGNORE_COMPLETELY_mode() throws URIException {
         // Given
-        URI uri = new URI("https://example.com:80/path/%C3%A1/?par%C3%A2m=v%C3%A3lue", true);
+        URI uri = new URI("http://example.com/path/%C3%A1/?par%C3%A2m=v%C3%A3lue", true);
         // When
         String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
                 uri,
                 SpiderParam.HandleParametersOption.IGNORE_COMPLETELY,
                 false);
         // Then
-        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/%C3%A1/")));
+        assertThat(cleanedUri, is(equalTo("http://example.com/path/%C3%A1/")));
     }
 
     @Test
     public void shouldCorrectlyParseQueryParamNamesAndValuesWithAmpersandsAndEqualsWhenCleaningParametersIn_USE_ALL_mode()
             throws URIException {
         // Given
-        URI uri = new URI("https://example.com:80/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2", true);
+        URI uri = new URI("http://example.com/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2", true);
         // When
         String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
                 uri,
                 SpiderParam.HandleParametersOption.USE_ALL,
                 false);
         // Then
-        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2")));
+        assertThat(cleanedUri, is(equalTo("http://example.com/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2")));
     }
 
     @Test
     public void shouldCorrectlyParseQueryParamNamesAndValuesWithAmpersandsAndEqualsWhenCleaningParametersIn_IGNORE_VALUE_mode()
             throws URIException {
         // Given
-        URI uri = new URI("https://example.com:80/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2", true);
+        URI uri = new URI("http://example.com/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2", true);
         // When
         String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
                 uri,
                 SpiderParam.HandleParametersOption.IGNORE_VALUE,
                 false);
         // Then
-        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/?par%26am2&par%3Dam1")));
+        assertThat(cleanedUri, is(equalTo("http://example.com/path/?par%26am2&par%3Dam1")));
     }
 
     @Test
     public void shouldCorrectlyParseQueryParamNamesAndValuesWithAmpersandsAndEqualsWhenCleaningParametersIn_IGNORE_COMPLETELY_mode()
             throws URIException {
         // Given
-        URI uri = new URI("https://example.com:80/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2", true);
+        URI uri = new URI("http://example.com/path/?par%3Dam1=val%26ue1&par%26am2=val%3Due2", true);
         // When
         String cleanedUri = URLCanonicalizer.buildCleanedParametersURIRepresentation(
                 uri,
                 SpiderParam.HandleParametersOption.IGNORE_COMPLETELY,
                 false);
         // Then
-        assertThat(cleanedUri, is(equalTo("https://example.com:80/path/")));
+        assertThat(cleanedUri, is(equalTo("http://example.com/path/")));
     }
 
 	// Test of the legacy behavior
