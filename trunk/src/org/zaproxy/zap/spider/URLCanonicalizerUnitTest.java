@@ -47,6 +47,16 @@ public class URLCanonicalizerUnitTest {
     }
 
     @Test
+    public void shouldCorrectlyParseQueryParameterNamesAndValuesWithAmpersandsAndEqualsWhenCanonicalizing() throws URIException {
+        // Given
+        String uri = new URI("http://example.com/?par%26am%3D1=val%26u%3De1", true).toString();
+        // When
+        String canonicalizedUri = URLCanonicalizer.getCanonicalURL(uri);
+        // Then
+        assertThat(canonicalizedUri, is(equalTo("http://example.com/?par%26am%3D1=val%26u%3De1")));
+    }
+
+    @Test
     public void shouldReturnPercentEncodedUriWhenCleaningParametersIn_USE_ALL_mode() throws URIException {
         // Given
         URI uri = new URI("http://example.com/path/%C3%A1/?par%C3%A2m=v%C3%A3lue", true);
