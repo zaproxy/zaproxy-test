@@ -1,6 +1,5 @@
 package org.zaproxy.zap.view;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -14,6 +13,7 @@ public class LayoutHelperUnitTest {
 	private static final int X = 1;
 	private static final int Y = 2;
 	private static final int WIDTH = 3;
+	private static final int HEIGHT = 4;
 	private static final double WEIGHT_X = 4.5;
 	private static final double WEIGHT_Y = 6.7;
 	private static final int FILL = 8;
@@ -52,11 +52,12 @@ public class LayoutHelperUnitTest {
 	public void shouldSetAllGivenParameters() {
 		// given
 		// when
-		GridBagConstraints constraints = LayoutHelper.getGBC(X,Y,WIDTH,WEIGHT_X,WEIGHT_Y,FILL,ANCHOR,INSETS);
+		GridBagConstraints constraints = LayoutHelper.getGBC(X,Y,WIDTH,HEIGHT,WEIGHT_X,WEIGHT_Y,FILL,ANCHOR,INSETS);
 		// then
 		assertThat(constraints.gridx, is(X));
 		assertThat(constraints.gridy, is(Y));
 		assertThat(constraints.gridwidth, is(WIDTH));
+		assertThat(constraints.gridheight, is(HEIGHT));
 		assertThat(constraints.weightx, is(WEIGHT_X));
 		assertThat(constraints.weighty, is(WEIGHT_Y));
 		assertThat(constraints.fill, is(FILL));
