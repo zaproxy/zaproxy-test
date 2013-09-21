@@ -2,6 +2,7 @@ package org.zaproxy.zap.authentication;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
@@ -52,6 +53,36 @@ public class AuthenticationMethodIndicatorsUnitTest {
 
 		// When/Then
 		assertEquals(LOGGED_OUT_INDICATOR, method.getLoggedOutIndicatorPattern().pattern());
+	}
+
+	@Test
+	public void shouldNotStoreNullOrEmptyLoggedInIndicator() {
+		// Given
+		method.setLoggedInIndicatorPattern(null);
+
+		// When/Then
+		assertNull(method.getLoggedInIndicatorPattern());
+
+		// Given
+		method.setLoggedInIndicatorPattern("  ");
+
+		// When/Then
+		assertNull(method.getLoggedInIndicatorPattern());
+	}
+
+	@Test
+	public void shouldNotStoreNullOrEmptyLoggedOutIndicator() {
+		// Given
+		method.setLoggedOutIndicatorPattern(null);
+
+		// When/Then
+		assertNull(method.getLoggedOutIndicatorPattern());
+
+		// Given
+		method.setLoggedOutIndicatorPattern("  ");
+
+		// When/Then
+		assertNull(method.getLoggedOutIndicatorPattern());
 	}
 
 	@Test
