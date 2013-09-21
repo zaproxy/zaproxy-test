@@ -11,9 +11,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.parosproxy.paros.model.Model;
+import org.parosproxy.paros.Constant;
 import org.parosproxy.paros.model.Session;
 import org.zaproxy.zap.authentication.AuthenticationMethodType.UnsupportedAuthenticationMethodException;
+import org.zaproxy.zap.model.InMemoryContextDataMockSession;
 
 @RunWith(MockitoJUnitRunner.class)
 public abstract class AbstractAuthenticationMethodUnitTest {
@@ -54,9 +55,11 @@ public abstract class AbstractAuthenticationMethodUnitTest {
 	@Ignore
 	public void shouldPersistAndLoadFromSession() throws UnsupportedAuthenticationMethodException,
 			SQLException {
+
 		// Given
+		Constant.getInstance();
 		AuthenticationMethod method = getMethodTypeImplementation().createAuthenticationMethod(0);
-		Session session = Model.getSingleton().newSession();
+		Session session = new InMemoryContextDataMockSession();
 
 		// When
 		getMethodTypeImplementation().persistMethodToSession(session, 0, method);
