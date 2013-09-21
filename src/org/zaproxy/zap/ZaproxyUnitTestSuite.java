@@ -15,6 +15,8 @@ import org.zaproxy.zap.extension.auth.ContextAuthUnitTest;
 import org.zaproxy.zap.extension.httppanel.view.hex.HttpPanelHexModelUnitTest;
 import org.zaproxy.zap.extension.pscan.PluginPassiveScannerUnitTest;
 import org.zaproxy.zap.model.ContextUnitTest;
+import org.zaproxy.zap.session.SessionManagementMethod;
+import org.zaproxy.zap.session.SessionManagementMethodUnitTestSuite;
 import org.zaproxy.zap.spider.URLCanonicalizerUnitTest;
 import org.zaproxy.zap.spider.URLResolverRfc1808ExamplesUnitTest;
 import org.zaproxy.zap.spider.URLResolverUnitTest;
@@ -57,6 +59,7 @@ import com.sittinglittleduck.DirBuster.EasySSLProtocolSocketFactoryUnitTest;
 		LayoutHelperUnitTest.class,
 		NullComparatorUnitTest.class,
 		PluginPassiveScannerUnitTest.class,
+		SessionManagementMethodUnitTestSuite.class,
 		SSLContextManagerUnitTest.class,
 		URLCanonicalizerUnitTest.class,
 		URLResolverRfc1808ExamplesUnitTest.class,
