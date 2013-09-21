@@ -13,7 +13,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 		// In alphabetical order
-		AuthenticationMethodIndicatorsUnitTest.class })
+		AuthenticationMethodIndicatorsUnitTest.class,
+		ManualAuthenticationMethodUnitTest.class})
 public final class AuthenticationUnitTestSuite {
 
 }
