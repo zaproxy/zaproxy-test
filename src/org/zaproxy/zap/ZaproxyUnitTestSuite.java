@@ -18,6 +18,7 @@ import org.zaproxy.zap.model.ContextUnitTest;
 import org.zaproxy.zap.spider.URLCanonicalizerUnitTest;
 import org.zaproxy.zap.spider.URLResolverRfc1808ExamplesUnitTest;
 import org.zaproxy.zap.spider.URLResolverUnitTest;
+import org.zaproxy.zap.users.UsersUnitTestSuite;
 import org.zaproxy.zap.utils.ByteBuilderUnitTest;
 import org.zaproxy.zap.utils.XMLStringUtilUnitTest;
 import org.zaproxy.zap.view.LayoutHelperUnitTest;
@@ -60,6 +61,7 @@ import com.sittinglittleduck.DirBuster.EasySSLProtocolSocketFactoryUnitTest;
 		URLCanonicalizerUnitTest.class,
 		URLResolverRfc1808ExamplesUnitTest.class,
 		URLResolverUnitTest.class,
+		UsersUnitTestSuite.class,
 		UtilUnitTest.class,
 		VariantODataUnitTest.class,
 		XMLStringUtilUnitTest.class,
