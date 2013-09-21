@@ -7,6 +7,7 @@ import org.parosproxy.paros.core.scanner.KbUnitTest;
 import org.parosproxy.paros.core.scanner.UtilUnitTest;
 import org.parosproxy.paros.core.scanner.VariantODataUnitTest;
 import org.parosproxy.paros.model.FileCopierTest;
+import org.zaproxy.zap.authentication.AuthenticationMethodIndicatorsUnitTest;
 import org.zaproxy.zap.control.AddOnCollectionUnitTest;
 import org.zaproxy.zap.control.AddOnUnitTest;
 import org.zaproxy.zap.control.ZapReleaseUnitTest;
@@ -18,7 +19,6 @@ import org.zaproxy.zap.spider.URLCanonicalizerUnitTest;
 import org.zaproxy.zap.spider.URLResolverRfc1808ExamplesUnitTest;
 import org.zaproxy.zap.spider.URLResolverUnitTest;
 import org.zaproxy.zap.utils.ByteBuilderUnitTest;
-import org.zaproxy.zap.utils.XMLStringUtil;
 import org.zaproxy.zap.utils.XMLStringUtilUnitTest;
 import org.zaproxy.zap.view.LayoutHelperUnitTest;
 
@@ -44,6 +44,7 @@ import com.sittinglittleduck.DirBuster.EasySSLProtocolSocketFactoryUnitTest;
 		AddOnUnitTest.class,
 		AliasCertificateUnitTest.class,
 		AliasKeyManagerUnitTest.class,
+		AuthenticationMethodIndicatorsUnitTest.class,
 		ByteBuilderUnitTest.class,
 		ContextAuthUnitTest.class,
 		ContextUnitTest.class,
