@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.parosproxy.paros.Constant;
 import org.zaproxy.zap.session.CookieBasedSessionManagementMethodType.CookieBasedSessionManagementMethod;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -17,6 +18,9 @@ public class CookieBasedSessionManagementMethodUnitTest extends AbstractSessionM
 
 	@BeforeClass
 	public static void classSetUp() {
+		// Make sure Constant is loaded for messages
+		Constant.getInstance();
+		
 		type = new CookieBasedSessionManagementMethodType();
 	}
 

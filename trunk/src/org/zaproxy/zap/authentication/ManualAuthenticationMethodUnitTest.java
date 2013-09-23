@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.parosproxy.paros.Constant;
 import org.zaproxy.zap.authentication.ManualAuthenticationMethodType.ManualAuthenticationMethod;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -17,6 +18,9 @@ public class ManualAuthenticationMethodUnitTest extends AbstractAuthenticationMe
 
 	@BeforeClass
 	public static void classSetUp() {
+		// Make sure Constant is loaded for messages
+		Constant.getInstance();
+		
 		type = new ManualAuthenticationMethodType();
 	}
 
