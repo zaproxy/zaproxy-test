@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.mockito.Mockito;
+import org.parosproxy.paros.model.Model;
 import org.parosproxy.paros.model.Session;
 
 /**
@@ -15,7 +17,7 @@ public class InMemoryContextDataMockSession extends Session {
 	public Map<Integer, Map<Integer, List<String>>> data;
 
 	public InMemoryContextDataMockSession() {
-		super(null);
+		super(Mockito.mock(Model.class));
 		this.data = new HashMap<>();
 	}
 

@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -52,7 +51,6 @@ public abstract class AbstractAuthenticationMethodUnitTest {
 	}
 
 	@Test
-	@Ignore
 	public void shouldPersistAndLoadFromSession() throws UnsupportedAuthenticationMethodException,
 			SQLException {
 
