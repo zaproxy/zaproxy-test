@@ -1,0 +1,12 @@
+<project name="zap-test-webapp" default="dist" basedir=".">
+	<description>Build ZAP TEST Web App</description>
+
+	<target name="dist" depends="" description="Generate the war file">
+		<!-- Create the war file -->
+		<war destfile="zap-test-webapp.war" needxmlfile='false'>
+			<fileset dir="WebContent" />
+			<classes dir="src" />
+		</war>
+	</target>
+
+</project>
