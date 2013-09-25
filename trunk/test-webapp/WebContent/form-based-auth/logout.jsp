@@ -32,6 +32,7 @@
 	<p>
 		Back to <a href="index.jsp">home</a>
 	</p>
+	<p>Unique Identifier usable in tests: fb-unrestricted-logout-512873</p>
 
 </body>
 </html>

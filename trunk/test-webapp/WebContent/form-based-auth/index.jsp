@@ -20,10 +20,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>OWASP ZAP Test WebApp - Form Based Authentication - Login</title>
+<title>OWASP ZAP Test WebApp - Form Based Authentication</title>
 </head>
 <body>
-	<H2>OWASP ZAP Test WebApp - Form Based Authentication - Login</H2>
+	<H2>OWASP ZAP Test WebApp - Form Based Authentication</H2>
 	<%
 		if (session.getAttribute("username") != null) {
 	%><p>
@@ -50,7 +50,7 @@
 		<a href="login.jsp">Login</a>
 	</p>
 
-	<p>Unique Identifier usable in tests: unrestricted-index-198734</p>
+	<p>Unique Identifier usable in tests: fb-unrestricted-index-198734</p>
 
 </body>
 </html>

@@ -44,6 +44,6 @@
 	<p>
 		You can also visit <a href="b.jsp">this other page.</a>
 	</p>
-	<p>Unique Identifier usable in tests: restricted-home-269039</p>
+	<p>Unique Identifier usable in tests: fb-restricted-home-269039</p>
 </body>
 </html>

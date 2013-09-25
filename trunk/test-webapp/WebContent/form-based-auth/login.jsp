@@ -41,6 +41,6 @@
 		Valid username / password pairs: <b>user1 / user1</b>,<b>user2 /
 			user2</b>,<b>user3 / user3</b>
 	</p>
-	<p>Unique Identifier usable in tests: unrestricted-login-238934</p>
+	<p>Unique Identifier usable in tests: fb-unrestricted-login-238934</p>
 </body>
 </html>
