@@ -40,6 +40,6 @@
 		Back to <a href="index.jsp">home</a>
 	</p>
 
-	<p>Unique Identifier usable in tests: unrestricted-error-498762</p>
+	<p>Unique Identifier usable in tests: fb-unrestricted-error-498762</p>
 </body>
 </html>

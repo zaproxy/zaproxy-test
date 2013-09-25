@@ -46,6 +46,6 @@
 		Back <a href="home.jsp">Home</a>
 	</p>
 
-	<p>Unique Identifier usable in tests: restricted-a-382641</p>
+	<p>Unique Identifier usable in tests: fb-restricted-a-382641</p>
 </body>
 </html>

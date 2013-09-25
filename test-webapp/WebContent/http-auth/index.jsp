@@ -20,27 +20,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>OWASP ZAP Test WebApp - Form Based Authentication</title>
+<title>OWASP ZAP Test WebApp - Http Authentication</title>
 </head>
 <body>
-	<H2>OWASP ZAP Test WebApp - Form Based Authentication</H2>
-	<%
-		if (session.getAttribute("username") != null) {
-			response.sendRedirect("restricted/home.jsp");
-			return;
-		}
-	%>
-	<p>In order to enter the authenticated section of the website,
-		please insert your credentials below:</p>
-	<form action="loginCheck.jsp" method="post">
-		<br />Username:<input type="text" name="username"> <br />Password:<input
-			type="password" name="password"> <br /> <input type="submit"
-			value="Submit">
-	</form>
+	<H2>OWASP ZAP Test WebApp - Http Authentication</H2>
+
+	<p>This section allows testing of various ZAP features which
+		require user authentication. Authentication is done using HTTP
+		Authentication.</p>
 	<p>
-		Valid username / password pairs: <b>user1 / user1</b>,<b>user2 /
-			user2</b>,<b>user3 / user3</b>
+		To access the restricted section, you will need to use a role named
+		'tomcat'. For example, if using Tomcat server, the roles are defined
+		in the <i>{tomcat-home}/conf/tomcat-users.xml</i> file.
 	</p>
-	<p>Unique Identifier usable in tests: fb-unrestricted-login-238934</p>
+
+	<p>
+		You can visit <a href="restricted/home.jsp">this restricted page.</a>
+	</p>
+
+	<p>
+		Or you can visit <a href="d.jsp">this unrestricted page.</a>
+	</p>
+
+	<p>Unique Identifier usable in tests:
+		http-unrestricted-index-142628</p>
+
 </body>
 </html>

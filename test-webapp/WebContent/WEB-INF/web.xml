@@ -5,5 +5,28 @@
  "http://java.sun.com/j2ee/dtds/web-app_2.2.dtd">
 
 <web-app>
+	<!-- Define a Security Constraint on this Application -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Weak authentication - basic</web-resource-name>
+			<url-pattern>/http-auth/restricted/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>tomcat</role-name>
+		</auth-constraint>
+	</security-constraint>
 
+	<!-- Define the Login Configuration for this Application -->
+	<login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>Zaproxy</realm-name>
+	</login-config>
+
+	<!-- Security roles referenced by this web application -->
+	<security-role>
+		<description>
+			The role that is required to access protected pages
+		</description>
+		<role-name>tomcat</role-name>
+	</security-role>
 </web-app>

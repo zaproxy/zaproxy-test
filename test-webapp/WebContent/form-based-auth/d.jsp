@@ -43,6 +43,6 @@
 		Go <a href="index.jsp">back</a>
 	</p>
 	
-	<p>Unique Identifier usable in tests: unrestricted-d-629742</p>
+	<p>Unique Identifier usable in tests: fb-unrestricted-d-629742</p>
 </body>
 </html>

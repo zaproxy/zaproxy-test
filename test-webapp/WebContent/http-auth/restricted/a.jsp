@@ -20,27 +20,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>OWASP ZAP Test WebApp - Form Based Authentication</title>
+<title>OWASP ZAP Test WebApp - Http Authentication - Authenticated</title>
 </head>
 <body>
-	<H2>OWASP ZAP Test WebApp - Form Based Authentication</H2>
-	<%
-		if (session.getAttribute("username") != null) {
-			response.sendRedirect("restricted/home.jsp");
-			return;
-		}
-	%>
-	<p>In order to enter the authenticated section of the website,
-		please insert your credentials below:</p>
-	<form action="loginCheck.jsp" method="post">
-		<br />Username:<input type="text" name="username"> <br />Password:<input
-			type="password" name="password"> <br /> <input type="submit"
-			value="Submit">
-	</form>
+	<H2>OWASP ZAP Test WebApp - Http Authentication - Authenticated</H2>
+
+	<p>This section is accessible only to authenticated users.</p>
+
 	<p>
-		Valid username / password pairs: <b>user1 / user1</b>,<b>user2 /
-			user2</b>,<b>user3 / user3</b>
+		You can now visit <a href="ac.jsp">this new page.</a>
 	</p>
-	<p>Unique Identifier usable in tests: fb-unrestricted-login-238934</p>
+
+	<p>
+		Back <a href="../index.jsp">Home</a>
+	</p>
+	<p>Unique Identifier usable in tests:
+		http-restricted-a-432342</p>
+
 </body>
 </html>
