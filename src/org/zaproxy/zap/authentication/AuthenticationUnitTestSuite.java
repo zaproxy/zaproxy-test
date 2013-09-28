@@ -8,13 +8,13 @@ import org.junit.runners.Suite.SuiteClasses;
  * Suite for all Authentication related unit tests of ZAP. Tests attached to this suite must run
  * independent of any environmental settings or preferences on any possible machine.
  * 
- * @author cosminstefanxp@gmail.com
+ * @author cosmin stefan
  */
 @RunWith(Suite.class)
 @SuiteClasses({
 		// In alphabetical order
-		AuthenticationMethodIndicatorsUnitTest.class,
-		ManualAuthenticationMethodUnitTest.class})
+		AuthenticationMethodIndicatorsUnitTest.class, ManualAuthenticationMethodUnitTest.class,
+		FormBasedAuthenticationMethodUnitTest.class })
 public final class AuthenticationUnitTestSuite {
 
 }

@@ -69,11 +69,14 @@ public class FormBasedAuthenticationMethodUnitTest extends AbstractAuthenticatio
 
 	@Test
 	public void shouldBuildCorrectPostAuthenticationMessage() throws Exception {
+		// Given
 		HttpSender mockedSender = mock(HttpSender.class);
 		doAnswer(new Answer<HttpMessage>() {
 			@Override
 			public HttpMessage answer(InvocationOnMock invocation) throws Throwable {
 				HttpMessage authMessage = ((HttpMessage) invocation.getArguments()[0]);
+
+				// Then
 				assertEquals(authMessage.getRequestHeader().getMethod(), HttpRequestHeader.POST);
 				assertEquals(authMessage.getRequestHeader().getURI().toString(), LOGIN_REQUEST_URL);
 				assertThat(authMessage.getRequestBody().toString(), containsString("username=" + USER_NAME
@@ -88,18 +91,21 @@ public class FormBasedAuthenticationMethodUnitTest extends AbstractAuthenticatio
 		SessionManagementMethod mockedSessionManagementMethod = Mockito.mock(SessionManagementMethod.class);
 		User mockedUser = mock(User.class);
 
+		// When
 		spiedMethod.authenticate(mockedSessionManagementMethod, getMockedCredentials(), mockedUser);
 	}
 
 	@Test
 	public void shouldAuthenticateWithRightCredentials()
 			throws UnsupportedAuthenticationCredentialsException, Exception {
+		// Given
 		SessionManagementMethod mockedSessionManagementMethod = mock(SessionManagementMethod.class);
 		doAnswer(new Answer<WebSession>() {
 
 			@Override
 			public WebSession answer(InvocationOnMock invocation) throws Throwable {
 				HttpMessage authMessage = ((HttpMessage) invocation.getArguments()[0]);
+				// Then
 				assertTrue(HttpStatusCode.isRedirection(authMessage.getResponseHeader().getStatusCode()));
 				assertEquals(authMessage.getResponseHeader().getHeader(HttpResponseHeader.LOCATION),
 						"http://localhost:8080/zap-test-webapp/form-based-auth/restricted/home.jsp");
@@ -109,6 +115,7 @@ public class FormBasedAuthenticationMethodUnitTest extends AbstractAuthenticatio
 
 		User mockedUser = mock(User.class);
 
+		// When
 		createMethod(LOGIN_REQUEST_URL, LOGIN_REQUEST_BODY).authenticate(mockedSessionManagementMethod,
 				getMockedCredentials(), mockedUser);
 	}
@@ -116,12 +123,14 @@ public class FormBasedAuthenticationMethodUnitTest extends AbstractAuthenticatio
 	@Test
 	public void shouldNotAuthenticateWithWrongCredentials()
 			throws UnsupportedAuthenticationCredentialsException, Exception {
+		// Given
 		SessionManagementMethod mockedSessionManagementMethod = mock(SessionManagementMethod.class);
 		doAnswer(new Answer<WebSession>() {
 
 			@Override
 			public WebSession answer(InvocationOnMock invocation) throws Throwable {
 				HttpMessage authMessage = ((HttpMessage) invocation.getArguments()[0]);
+				// Then
 				assertTrue(HttpStatusCode.isRedirection(authMessage.getResponseHeader().getStatusCode()));
 				assertEquals(authMessage.getResponseHeader().getHeader(HttpResponseHeader.LOCATION),
 						"http://localhost:8080/zap-test-webapp/form-based-auth/error.jsp");
@@ -134,16 +143,19 @@ public class FormBasedAuthenticationMethodUnitTest extends AbstractAuthenticatio
 
 		User mockedUser = mock(User.class);
 
+		// When
 		createMethod(LOGIN_REQUEST_URL, LOGIN_REQUEST_BODY).authenticate(mockedSessionManagementMethod,
 				mockedCredentials, mockedUser);
 	}
 
 	@Test
 	public void shouldBuildCorrectGetAuthenticationMessage() throws Exception {
+		// Given
 		HttpSender mockedSender = mock(HttpSender.class);
 		doAnswer(new Answer<HttpMessage>() {
 			@Override
 			public HttpMessage answer(InvocationOnMock invocation) throws Throwable {
+				// Then
 				HttpMessage authMessage = ((HttpMessage) invocation.getArguments()[0]);
 				assertEquals(authMessage.getRequestHeader().getMethod(), HttpRequestHeader.GET);
 				assertEquals(authMessage.getRequestHeader().getURI().toString(), LOGIN_REQUEST_URL);
@@ -157,6 +169,7 @@ public class FormBasedAuthenticationMethodUnitTest extends AbstractAuthenticatio
 		User mockedUser = mock(User.class);
 		SessionManagementMethod mockedSessionManagementMethod = Mockito.mock(SessionManagementMethod.class);
 
+		// When
 		spiedMethod.authenticate(mockedSessionManagementMethod, getMockedCredentials(), mockedUser);
 	}
 
