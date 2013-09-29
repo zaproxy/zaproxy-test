@@ -24,12 +24,21 @@ import org.parosproxy.paros.network.HttpRequestHeader;
 import org.parosproxy.paros.network.HttpResponseHeader;
 import org.parosproxy.paros.network.HttpSender;
 import org.parosproxy.paros.network.HttpStatusCode;
+import org.zaproxy.zap.TestWebAppUtils;
 import org.zaproxy.zap.authentication.AuthenticationMethod.UnsupportedAuthenticationCredentialsException;
 import org.zaproxy.zap.authentication.FormBasedAuthenticationMethodType.FormBasedAuthenticationMethod;
 import org.zaproxy.zap.session.SessionManagementMethod;
 import org.zaproxy.zap.session.WebSession;
 import org.zaproxy.zap.users.User;
 
+/**
+ * A set of unit tests for {@link FormBasedAuthenticationMethod}. In order for the test to properly
+ * work, the following configuration must be done:
+ * <ul>
+ * <li>The test-webapp (test-webapp/zap-test-webapp.war) should be started and deployed on localhost
+ * (more specifically deployed on the path specified by {@link TestWebAppUtils#APP_BASE_URL}).</li>
+ * </ul>
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class FormBasedAuthenticationMethodUnitTest extends AbstractAuthenticationMethodUnitTest {
 

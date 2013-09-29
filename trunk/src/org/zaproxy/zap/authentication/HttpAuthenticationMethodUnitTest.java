@@ -1,28 +1,38 @@
 package org.zaproxy.zap.authentication;
 
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.parosproxy.paros.Constant;
+import org.zaproxy.zap.TestWebAppUtils;
 import org.zaproxy.zap.authentication.HttpAuthenticationMethodType.HttpAuthenticationMethod;
 import org.zaproxy.zap.session.SessionManagementMethod;
 import org.zaproxy.zap.session.WebSession;
 import org.zaproxy.zap.users.User;
 
+/**
+ * A set of unit tests for {@link HttpAuthenticationMethod}. In order for the test to properly work,
+ * the following configuration must be done:
+ * <ul>
+ * <li>The test-webapp (test-webapp/zap-test-webapp.war) should be started and deployed on localhost
+ * (more specifically deployed on the path specified by {@link TestWebAppUtils#APP_BASE_URL}).</li>
+ * </ul>
+ */
+@RunWith(MockitoJUnitRunner.class)
 public class HttpAuthenticationMethodUnitTest extends AbstractAuthenticationMethodUnitTest {
-
-	private static final String HOSTNAME = "localhost";
-	private static final String REALM = "Zaproxy";
-	private static final int PORT = 8080;
-	private static final String USER_NAME = "tomcat";
-	private static final String USER_PASS = "tomcat";
 
 	private static HttpAuthenticationMethodType type;
 
@@ -42,8 +52,8 @@ public class HttpAuthenticationMethodUnitTest extends AbstractAuthenticationMeth
 	private User getMockedUser() {
 		UsernamePasswordAuthenticationCredentials mockedCredentials = Mockito
 				.mock(UsernamePasswordAuthenticationCredentials.class);
-		when(mockedCredentials.getUsername()).thenReturn(USER_NAME);
-		when(mockedCredentials.getPassword()).thenReturn(USER_PASS);
+		when(mockedCredentials.getUsername()).thenReturn(TestWebAppUtils.HTTP_AUTH_USERNAME);
+		when(mockedCredentials.getPassword()).thenReturn(TestWebAppUtils.HTTP_AUTH_USERPASS);
 
 		User mockedUser = Mockito.mock(User.class);
 		when(mockedUser.getAuthenticationCredentials()).thenReturn(mockedCredentials);
@@ -53,9 +63,9 @@ public class HttpAuthenticationMethodUnitTest extends AbstractAuthenticationMeth
 
 	private HttpAuthenticationMethod createMethod() {
 		HttpAuthenticationMethod method = type.createAuthenticationMethod(0);
-		method.hostname = HOSTNAME;
-		method.realm = REALM;
-		method.port = PORT;
+		method.hostname = TestWebAppUtils.HTTP_AUTH_HOSTNAME;
+		method.realm = TestWebAppUtils.HTTP_AUTH_REALM;
+		method.port = TestWebAppUtils.HTTP_AUTH_PORT;
 		return method;
 	}
 
@@ -72,7 +82,7 @@ public class HttpAuthenticationMethodUnitTest extends AbstractAuthenticationMeth
 	public void shouldSetDefaultValuesForAuthenticationFields() {
 		// Given
 		HttpAuthenticationMethod method = type.createAuthenticationMethod(0);
-		method.hostname = HOSTNAME;
+		method.hostname = TestWebAppUtils.HTTP_AUTH_HOSTNAME;
 
 		HttpState state = new HttpState();
 
@@ -87,7 +97,7 @@ public class HttpAuthenticationMethodUnitTest extends AbstractAuthenticationMeth
 		// When
 		method.authenticate(mockedSessionManagementMethod, mockedUser.getAuthenticationCredentials(),
 				mockedUser);
-		AuthScope scope = new AuthScope(HOSTNAME, 80, AuthScope.ANY_REALM);
+		AuthScope scope = new AuthScope(TestWebAppUtils.HTTP_AUTH_HOSTNAME, 80, AuthScope.ANY_REALM);
 		UsernamePasswordCredentials configuredCredentials = (UsernamePasswordCredentials) state
 				.getCredentials(scope);
 
@@ -111,13 +121,14 @@ public class HttpAuthenticationMethodUnitTest extends AbstractAuthenticationMeth
 		// When
 		createMethod().authenticate(mockedSessionManagementMethod, mockedUser.getAuthenticationCredentials(),
 				mockedUser);
-		AuthScope scope = new AuthScope(HOSTNAME, PORT, REALM);
+		AuthScope scope = new AuthScope(TestWebAppUtils.HTTP_AUTH_HOSTNAME, TestWebAppUtils.HTTP_AUTH_PORT,
+				TestWebAppUtils.HTTP_AUTH_REALM);
 		UsernamePasswordCredentials configuredCredentials = (UsernamePasswordCredentials) state
 				.getCredentials(scope);
 
 		// Then
 		assertNotNull(configuredCredentials);
-		assertEquals(configuredCredentials.getUserName(), USER_NAME);
-		assertEquals(configuredCredentials.getPassword(), USER_PASS);
+		assertEquals(configuredCredentials.getUserName(), TestWebAppUtils.HTTP_AUTH_USERNAME);
+		assertEquals(configuredCredentials.getPassword(), TestWebAppUtils.HTTP_AUTH_USERPASS);
 	}
 }

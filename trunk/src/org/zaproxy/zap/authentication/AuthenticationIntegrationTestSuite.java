@@ -12,7 +12,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author cosmin stefan
  */
 @RunWith(Suite.class)
-@SuiteClasses({ FormBasedAuthenticationIntegrationTest.class })
+@SuiteClasses({ FormBasedAuthenticationIntegrationTest.class, HttpAuthenticationIntegrationTest.class })
 public final class AuthenticationIntegrationTestSuite {
 
 }
