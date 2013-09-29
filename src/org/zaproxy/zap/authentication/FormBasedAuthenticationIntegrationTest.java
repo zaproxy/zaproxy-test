@@ -94,9 +94,8 @@ public class FormBasedAuthenticationIntegrationTest {
 	public void setup() {
 		// Prepare a test user
 		user = spy(new User(0, USER_NAME));
-		UsernamePasswordAuthenticationCredentials credentials = type.createAuthenticationCredentials();
-		credentials.username = USER_NAME;
-		credentials.password = USER_PASS;
+		UsernamePasswordAuthenticationCredentials credentials = new UsernamePasswordAuthenticationCredentials(
+				USER_NAME, USER_PASS);
 		user.setAuthenticationCredentials(credentials);
 		doReturn(mockedContext).when(user).getContext();
 	}

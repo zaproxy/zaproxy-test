@@ -14,7 +14,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 		// In alphabetical order
 		AuthenticationMethodIndicatorsUnitTest.class, ManualAuthenticationMethodUnitTest.class,
-		FormBasedAuthenticationMethodUnitTest.class })
+		FormBasedAuthenticationMethodUnitTest.class, HttpAuthenticationMethodUnitTest.class })
 public final class AuthenticationUnitTestSuite {
 
 }
