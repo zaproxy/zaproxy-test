@@ -12,7 +12,7 @@ import org.parosproxy.paros.Constant;
 import org.zaproxy.zap.session.CookieBasedSessionManagementMethodType.CookieBasedSessionManagementMethod;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CookieBasedSessionManagementMethodUnitTest extends AbstractSessionManagementMethodUnitTest {
+public class CookieBasedSessionManagementMethodIntegrationTest extends AbstractSessionManagementMethodIntegrationTest {
 
 	private static CookieBasedSessionManagementMethodType type;
 

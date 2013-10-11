@@ -16,7 +16,7 @@ import org.zaproxy.zap.model.InMemoryContextDataMockSession;
 import org.zaproxy.zap.session.SessionManagementMethodType.UnsupportedSessionManagementMethodException;
 
 @RunWith(MockitoJUnitRunner.class)
-public abstract class AbstractSessionManagementMethodUnitTest {
+public abstract class AbstractSessionManagementMethodIntegrationTest {
 
 	protected abstract SessionManagementMethodType getMethodTypeImplementation();
 

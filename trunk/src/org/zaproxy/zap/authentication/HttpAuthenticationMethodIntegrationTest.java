@@ -32,7 +32,7 @@ import org.zaproxy.zap.users.User;
  * </ul>
  */
 @RunWith(MockitoJUnitRunner.class)
-public class HttpAuthenticationMethodUnitTest extends AbstractAuthenticationMethodUnitTest {
+public class HttpAuthenticationMethodIntegrationTest extends AbstractAuthenticationMethodUnitTest {
 
 	private static HttpAuthenticationMethodType type;
 
