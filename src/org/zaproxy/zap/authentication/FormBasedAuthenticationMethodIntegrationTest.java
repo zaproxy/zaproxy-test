@@ -40,7 +40,7 @@ import org.zaproxy.zap.users.User;
  * </ul>
  */
 @RunWith(MockitoJUnitRunner.class)
-public class FormBasedAuthenticationMethodUnitTest extends AbstractAuthenticationMethodUnitTest {
+public class FormBasedAuthenticationMethodIntegrationTest extends AbstractAuthenticationMethodUnitTest {
 
 	private static FormBasedAuthenticationMethodType type;
 	private static final String LOGGED_IN_INDICATOR = "Welcome [^\\s]*";

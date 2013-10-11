@@ -12,7 +12,7 @@ import org.parosproxy.paros.Constant;
 import org.zaproxy.zap.authentication.ManualAuthenticationMethodType.ManualAuthenticationMethod;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ManualAuthenticationMethodUnitTest extends AbstractAuthenticationMethodUnitTest {
+public class ManualAuthenticationMethodIntegrationTest extends AbstractAuthenticationMethodUnitTest {
 
 	private static ManualAuthenticationMethodType type;
 

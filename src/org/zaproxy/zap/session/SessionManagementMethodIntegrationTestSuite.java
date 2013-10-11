@@ -12,8 +12,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	// In alphabetical order
-	CookieBasedSessionManagementMethodUnitTest.class})
-public final class SessionManagementMethodUnitTestSuite {
+	CookieBasedSessionManagementMethodIntegrationTest.class})
+public final class SessionManagementMethodIntegrationTestSuite {
 
 }
