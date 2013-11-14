@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.parosproxy.paros.network.HttpMessage;
+import org.zaproxy.zap.extension.reauth.ContextAuth;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ContextAuthUnitTest {
