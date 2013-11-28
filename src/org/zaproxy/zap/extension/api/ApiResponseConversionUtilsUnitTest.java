@@ -59,8 +59,21 @@ public class ApiResponseConversionUtilsUnitTest {
 	}
 
 	@Test
-	@Ignore
 	public void propertiesFromGivenHttpMessageShouldReflectInApiResponse() {
+		given(message.getCookieParamsAsString()).willReturn("testCookies");
+		given(message.getNote()).willReturn("testNote");
+		given(requestHeader.toString()).willReturn("testRequestHeader");
+		given(requestBody.toString()).willReturn("testRequestBody");
+		given(responseHeader.toString()).willReturn("testResponseHeader");
+		
+		ApiResponseSet response = ApiResponseConversionUtils.httpMessageToSet(0, message);
+		
+		assertThat(response.getValues(), hasEntry("cookieParams", "testCookies"));
+		assertThat(response.getValues(), hasEntry("note", "testNote"));
+		assertThat(response.getValues(), hasEntry("requestHeader", requestHeader.toString()));
+		assertThat(response.getValues(), hasEntry("requestBody", requestBody.toString()));
+		assertThat(response.getValues(), hasEntry("responseHeader", responseHeader.toString()));
+		
 	}
 
 	@Test
