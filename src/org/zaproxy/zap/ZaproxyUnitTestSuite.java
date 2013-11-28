@@ -16,7 +16,6 @@ import org.zaproxy.zap.extension.auth.ContextAuthUnitTest;
 import org.zaproxy.zap.extension.httppanel.view.hex.HttpPanelHexModelUnitTest;
 import org.zaproxy.zap.extension.pscan.PluginPassiveScannerUnitTest;
 import org.zaproxy.zap.model.ContextUnitTest;
-import org.zaproxy.zap.session.SessionManagementMethodIntegrationTestSuite;
 import org.zaproxy.zap.spider.URLCanonicalizerUnitTest;
 import org.zaproxy.zap.spider.URLResolverRfc1808ExamplesUnitTest;
 import org.zaproxy.zap.spider.URLResolverUnitTest;
