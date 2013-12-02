@@ -5,8 +5,10 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.BDDMockito.given;
 
+import java.io.ByteArrayOutputStream;
+import java.util.zip.GZIPOutputStream;
+
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -60,7 +62,7 @@ public class ApiResponseConversionUtilsUnitTest {
 
 	@Test
 	public void propertiesFromGivenHttpMessageShouldReflectInApiResponse() {
-		given(message.getCookieParamsAsString()).willReturn("testCookies");
+		given(message.getCookieParamsAsString()).willReturn("testCookieParams");
 		given(message.getNote()).willReturn("testNote");
 		given(requestHeader.toString()).willReturn("testRequestHeader");
 		given(requestBody.toString()).willReturn("testRequestBody");
@@ -68,17 +70,22 @@ public class ApiResponseConversionUtilsUnitTest {
 		
 		ApiResponseSet response = ApiResponseConversionUtils.httpMessageToSet(0, message);
 		
-		assertThat(response.getValues(), hasEntry("cookieParams", "testCookies"));
+			
+		assertThat(response.getValues(), hasEntry("cookieParams", "testCookieParams"));
 		assertThat(response.getValues(), hasEntry("note", "testNote"));
 		assertThat(response.getValues(), hasEntry("requestHeader", requestHeader.toString()));
 		assertThat(response.getValues(), hasEntry("requestBody", requestBody.toString()));
 		assertThat(response.getValues(), hasEntry("responseHeader", responseHeader.toString()));
-		
 	}
 
 	@Test
-	@Ignore
-	public void compressedResponseBodyShouldBeDeflatedIntoApiResponse() {
+	public void compressedResponseBodyShouldBeDeflatedIntoApiResponse() throws Exception {
+		given(responseHeader.getHeader(HttpHeader.CONTENT_ENCODING)).willReturn(HttpHeader.GZIP);
+		given(responseBody.getBytes()).willReturn(gzip(new byte[] {97, 98, 99}));
+
+		ApiResponseSet response = ApiResponseConversionUtils.httpMessageToSet(0, message);
+		
+		assertThat(response.getValues(), hasEntry("responseBody", "abc"));
 	}
 
 	@Test
@@ -89,6 +96,15 @@ public class ApiResponseConversionUtilsUnitTest {
 		ApiResponseSet response = ApiResponseConversionUtils.httpMessageToSet(0, message);
 		
 		assertThat(response.getValues(), hasEntry("responseBody", responseBody.toString()));
+	}
+	
+	private byte[] gzip(byte[] raw) throws Exception {
+		ByteArrayOutputStream bytes = new ByteArrayOutputStream(raw.length);
+		GZIPOutputStream zip = new GZIPOutputStream(bytes);
+		zip.write(raw);
+		zip.close();
+		return bytes.toByteArray();
+		
 	}
 
 }
