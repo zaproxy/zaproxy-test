@@ -24,26 +24,31 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.parosproxy.paros.extension.CommandLineArgument;
+import org.parosproxy.paros.extension.CommandLineListener;
 
 public class CommandLineTest {
 	
 	private CommandLine cmdLine;
 	private Vector<CommandLineArgument[]> clArgs;
+	private Map<String, CommandLineListener> extMap;
 	
 	@Before
 	public void setUp() throws Exception {
 		clArgs = new Vector<CommandLineArgument[]>();
+		extMap = new HashMap<String, CommandLineListener>();
 	}
 
 	@Test
 	public void emptyCommandLine() throws Exception {
 		cmdLine = new CommandLine(new String[] {});
-		cmdLine.parse(clArgs);
+		cmdLine.parse(clArgs, extMap);
 		assertTrue(cmdLine.isGUI());
 		assertFalse(cmdLine.isDaemon());
 		assertFalse(cmdLine.isReportVersion());
@@ -52,7 +57,7 @@ public class CommandLineTest {
 	@Test
 	public void daemonFlag() throws Exception {
 		cmdLine = new CommandLine(new String[] {"-daemon"});
-		cmdLine.parse(clArgs);
+		cmdLine.parse(clArgs, extMap);
 		assertFalse(cmdLine.isGUI());
 		assertTrue(cmdLine.isDaemon());
 		assertFalse(cmdLine.isReportVersion());
@@ -62,7 +67,7 @@ public class CommandLineTest {
 	public void unsupportedFlag() throws Exception {
 		cmdLine = new CommandLine(new String[] {"-unsupported"});
 		try {
-			cmdLine.parse(clArgs);
+			cmdLine.parse(clArgs, extMap);
 			fail("Expected an exception");
 		} catch (Exception e) {
 			// Expected
@@ -75,7 +80,7 @@ public class CommandLineTest {
 		clArgs.add(new CommandLineArgument[] {new CommandLineArgument("-a", 0, null, null, null)});
 		clArgs.add(new CommandLineArgument[] {new CommandLineArgument("-b", 0, null, null, null)});
 		clArgs.add(new CommandLineArgument[] {new CommandLineArgument("-c", 0, null, null, null)});
-		cmdLine.parse(clArgs);
+		cmdLine.parse(clArgs, extMap);
 
 		assertTrue(clArgs.get(0)[0].isEnabled());
 		assertTrue(clArgs.get(1)[0].isEnabled());
@@ -88,7 +93,7 @@ public class CommandLineTest {
 		clArgs.add(new CommandLineArgument[] {new CommandLineArgument("-a", 1, null, null, null)});
 		clArgs.add(new CommandLineArgument[] {new CommandLineArgument("-b", 2, null, null, null)});
 		clArgs.add(new CommandLineArgument[] {new CommandLineArgument("-c", 3, null, null, null)});
-		cmdLine.parse(clArgs);
+		cmdLine.parse(clArgs, extMap);
 
 		assertTrue(clArgs.get(0)[0].isEnabled());
 		assertThat(clArgs.get(0)[0].getArguments().size(), is(equalTo(1)));
@@ -111,7 +116,7 @@ public class CommandLineTest {
 		clArgs.add(new CommandLineArgument[] {new CommandLineArgument("-b", 2, null, null, null)});
 		clArgs.add(new CommandLineArgument[] {new CommandLineArgument("-c", 3, null, null, null)});
 		try {
-			cmdLine.parse(clArgs);
+			cmdLine.parse(clArgs, extMap);
 			fail("Expected an exception");
 		} catch (Exception e) {
 			// Expected
@@ -122,9 +127,18 @@ public class CommandLineTest {
 	public void claWithPattern() throws Exception {
 		cmdLine = new CommandLine(new String[] {"-script", "aaa", "bbb", "ccc"});
 		clArgs.add(new CommandLineArgument[] {new CommandLineArgument("-script", -1, ".*", null, null)});
-		cmdLine.parse(clArgs);
+		cmdLine.parse(clArgs, extMap);
 		assertTrue(clArgs.get(0)[0].isEnabled());
 		assertThat(clArgs.get(0)[0].getArguments().size(), is(equalTo(3)));
+	}
+
+	@Test
+	public void nullClaWithPattern() throws Exception {
+		cmdLine = new CommandLine(new String[] {"aaa.test"});
+		clArgs.add(new CommandLineArgument[] {new CommandLineArgument("", -1, ".*\\.test", null, null)});
+		cmdLine.parse(clArgs, extMap);
+		assertTrue(clArgs.get(0)[0].isEnabled());
+		assertThat(clArgs.get(0)[0].getArguments().size(), is(equalTo(1)));
 	}
 
 }
