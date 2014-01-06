@@ -220,7 +220,7 @@ public class VariantODataUnitTest {
 		
 		
 		//When
-		NameValuePair originalPair = new NameValuePair(paramName, originalValue, 1); 
+		NameValuePair originalPair = new NameValuePair(NameValuePair.TYPE_URL, paramName, originalValue, 1); 
 		msg.getRequestHeader().setURI((URI) sourceURI.clone());		
 		variant.setMessage(msg);
 
