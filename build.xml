@@ -83,6 +83,8 @@
                 </fileset>
             </batchtest>
 		</junit>
+        <!-- Run the quick unit tests -->
+		<antcall target="unit-test-start-stop"/> 
 	</target>
 
     <target name="check-for-errors">
