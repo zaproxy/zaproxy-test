@@ -6,6 +6,19 @@
     <property name="src.version" value="1.7" />
 	<property name="zaproxy" location="../zaproxy" />
 	<property name="zaproxy-extensions" location="../zap-extensions" />
+	<property name="zaproxy-extensions-beta" location="../zap-extensions-beta" />
+	<property name="zaproxy-extensions-alpha" location="../zap-extensions-alpha" />
+
+    <!-- Detect Operating system -->
+    <condition property="isMac">
+        <os family="mac" />
+    </condition>
+    <condition property="isUnix">
+        <os family="unix" />
+    </condition>
+    <condition property="isWindows">
+        <os family="windows" />
+    </condition>
 	
     <target name="init">
         <mkdir dir="${build}" />
@@ -71,6 +84,152 @@
             </batchtest>
 		</junit>
 	</target>
+
+    <target name="check-for-errors">
+    	<!-- Sanity check - there should always be some INFO messages -->
+    	<copy file="${test-dir}/test/zap.log" tofile="${test-dir}/test/zap.info">
+    	  <filterchain>
+    	    <linecontains>
+    	      <contains value="INFO"/>
+    	    </linecontains>
+    	  </filterchain>
+    	</copy>
+    	
+    	<fail message="No INFO messages in ${test-dir}/test/zap.log'">
+		    <condition>
+		    	<length file="${test-dir}/test/zap.info" when="eq" length="0" />
+		    </condition>
+		</fail>
+
+    	<!-- Now check for errors -->
+    	<copy file="${test-dir}/test/zap.log" tofile="${test-dir}/test/zap.errors">
+    	  <filterchain>
+    	    <linecontains>
+    	      <contains value="ERROR"/>
+    	    </linecontains>
+    	  </filterchain>
+    	</copy>
+    	
+    	<!-- Echo any found to the console - cant use loadfile as it fails on empty files -->
+    	<concat>
+    	    <fileset file="${test-dir}/test/zap.errors"/>
+    	</concat>
+
+		<fail message="Found ERROR messages in ${test-dir}/test/zap.log">
+		    <condition>
+		    	<!-- Error check - there shouldnt be any ERROR messages -->
+		    	<length  file="${test-dir}/test/zap.errors" when="gt" length="0" />
+		    </condition>
+		</fail>
+    	
+	</target>
+
+    <target name="deploy-to">
+        <!--  Deploy ZAP -->
+    	<copy todir="${test-dir}">
+            <fileset dir="${zaproxy}/build/zap" />
+        </copy>
+    	<chmod file="${test-dir}/zap.sh" perm="u+x"/>
+
+        <!--  Deploy all release add-ons -->
+    	<copy todir="${test-dir}/plugin" overwrite="true">
+            <fileset dir="${zaproxy-extensions}/build/zap-exts" includes="*.zap" excludes="example*"/>
+        </copy>
+
+        <!--  Deploy all beta add-ons -->
+    	<copy todir="${test-dir}/plugin" overwrite="true">
+            <fileset dir="${zaproxy-extensions-beta}/build/zap-exts" includes="*.zap"/>
+        </copy>
+
+        <!--  Deploy all alpha add-ons -->
+    	<!-- Hold off doing this for now - too many errors
+    	<copy todir="${test-dir}/plugin" overwrite="true">
+            <fileset dir="${zaproxy-extensions-alpha}/build/zap-exts" includes="*.zap"/>
+        </copy>
+        -->
+	</target>
+
+	
+    <target name="unit-test-start-stop">
+    	<!-- Start and stop ZAP as a daemon and check if any errors logged -->
+    	
+    	<property name="test-dir" value="start-stop-dir" />
+
+        <delete dir="${test-dir}" includeEmptyDirs="true" />
+        <mkdir dir="${test-dir}" />
+    	
+		<antcall target="deploy-to"> 
+			<param name="test-dir" location="${test-dir}"/>
+		</antcall>
+
+        <condition property="script" value="zap.bat" else="./zap.sh">
+            <istrue value="${isWindows}" />
+        </condition>
+
+    	<exec dir="${test-dir}" executable="${script}" spawn="true">
+    	    <arg value="-daemon"/>
+    	    <arg value="-dir test"/>
+    	    <arg value="-port 8090"/>
+    	</exec>
+
+    	<!-- Give plenty of time to start up -->
+    	<sleep seconds="20"/>
+    	
+    	<!-- Stop by accessing the API directly -->
+    	<get src="http://localhost:8090/JSON/core/action/shutdown/" dest="${test-dir}/shutdown.json"/>
+
+    	<!-- Give time to shut down -->
+        <sleep seconds="5"/>
+
+		<antcall target="check-for-errors"> 
+			<param name="test-dir" location="${test-dir}"/> 
+		</antcall>
+
+    </target>
+	
+    <target name="unit-test">
+    	<!--
+    		A parameterized task for running command line scans of urls.
+    		Do not call directly.
+    		You should typicaly have built zaproxy zaproxy-extensions and zaproxy-extensions-beta prior to this, 
+    		but might well not want to do that every time, which is why its not automated. 
+    	-->
+    	
+        <delete dir="${test-dir}" includeEmptyDirs="true" />
+        <mkdir dir="${test-dir}" />
+    	
+		<antcall target="deploy-to"> 
+			<param name="test-dir" location="${test-dir}"/>
+		</antcall>
+
+        <condition property="script" value="zap.bat" else="./zap.sh">
+            <istrue value="${isWindows}" />
+        </condition>
+
+    	<exec dir="${test-dir}" executable="${script}">
+    	    <arg value="-cmd"/>
+    	    <arg value="-dir test"/>
+    	    <arg value="-quickurl ${test-url}"/>
+    	    <arg value="-quickout scan-result.xml"/>
+    	    <arg value="-port 8090"/>
+    	</exec>
+    	
+		<antcall target="check-for-errors"> 
+			<param name="test-dir" location="test-bodgeit"/> 
+		</antcall>
+
+    	<!-- TODO 
+    		compare results! 
+    	 -->
+    </target>
+	
+    <target name="unit-test-bodgeit">
+		<antcall target="unit-test"> 
+			<param name="test-dir" location="test-bodgeit"/> 
+			<param name="test-url" value="http://localhost:8080/bodgeit/"/> 
+		</antcall>
+    </target>
+
 
 	<target name="bodgeittest" depends="compile">
 		
