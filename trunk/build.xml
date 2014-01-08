@@ -5,6 +5,7 @@
     <property name="src" location="src" />
     <property name="src.version" value="1.7" />
 	<property name="zaproxy" location="../zaproxy" />
+	<property name="zaproxy-2.2" location="../zaproxy-2.2" />
 	<property name="zaproxy-extensions" location="../zap-extensions" />
 	<property name="zaproxy-extensions-beta" location="../zap-extensions-beta" />
 	<property name="zaproxy-extensions-alpha" location="../zap-extensions-alpha" />
@@ -85,6 +86,7 @@
 		</junit>
         <!-- Run the quick unit tests -->
 		<antcall target="unit-test-start-stop"/> 
+		<antcall target="unit-test-2.2-start-stop"/> 
 	</target>
 
     <target name="check-for-errors">
@@ -126,13 +128,7 @@
     	
 	</target>
 
-    <target name="deploy-to">
-        <!--  Deploy ZAP -->
-    	<copy todir="${test-dir}">
-            <fileset dir="${zaproxy}/build/zap" />
-        </copy>
-    	<chmod file="${test-dir}/zap.sh" perm="u+x"/>
-
+    <target name="deploy-addons">
         <!--  Deploy all release add-ons -->
     	<copy todir="${test-dir}/plugin" overwrite="true">
             <fileset dir="${zaproxy-extensions}/build/zap-exts" includes="*.zap" excludes="example*"/>
@@ -151,6 +147,29 @@
         -->
 	</target>
 
+    <target name="deploy-to">
+        <!--  Deploy ZAP -->
+    	<copy todir="${test-dir}">
+            <fileset dir="${zaproxy}/build/zap" />
+        </copy>
+    	<chmod file="${test-dir}/zap.sh" perm="u+x"/>
+
+		<antcall target="deploy-addons"> 
+			<param name="test-dir" location="${test-dir}"/>
+		</antcall>
+	</target>
+	
+    <target name="deploy-2.2-to">
+        <!--  Deploy ZAP -->
+    	<copy todir="${test-dir}">
+            <fileset dir="${zaproxy-2.2}/build/zap" />
+        </copy>
+    	<chmod file="${test-dir}/zap.sh" perm="u+x"/>
+
+		<antcall target="deploy-addons"> 
+			<param name="test-dir" location="${test-dir}"/>
+		</antcall>
+	</target>
 	
     <target name="unit-test-start-stop">
     	<!-- Start and stop ZAP as a daemon and check if any errors logged -->
@@ -188,7 +207,44 @@
 		</antcall>
 
     </target>
-	
+
+    <target name="unit-test-2.2-start-stop">
+    	<!-- Start and stop ZAP 2.2 as a daemon and check if any errors logged -->
+    	
+    	<property name="test-dir" value="start-stop-2.2-dir" />
+
+        <delete dir="${test-dir}" includeEmptyDirs="true" />
+        <mkdir dir="${test-dir}" />
+    	
+		<antcall target="deploy-2.2-to"> 
+			<param name="test-dir" location="${test-dir}"/>
+		</antcall>
+
+        <condition property="script" value="zap.bat" else="./zap.sh">
+            <istrue value="${isWindows}" />
+        </condition>
+
+    	<exec dir="${test-dir}" executable="${script}" spawn="true">
+    	    <arg value="-daemon"/>
+    	    <arg value="-dir test"/>
+    	    <arg value="-port 8090"/>
+    	</exec>
+
+    	<!-- Give plenty of time to start up -->
+    	<sleep seconds="20"/>
+    	
+    	<!-- Stop by accessing the API directly -->
+    	<get src="http://localhost:8090/JSON/core/action/shutdown/" dest="${test-dir}/shutdown.json"/>
+
+    	<!-- Give time to shut down -->
+        <sleep seconds="5"/>
+
+		<antcall target="check-for-errors"> 
+			<param name="test-dir" location="${test-dir}"/> 
+		</antcall>
+
+    </target>
+
     <target name="unit-test">
     	<!--
     		A parameterized task for running command line scans of urls.
