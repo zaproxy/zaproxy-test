@@ -52,7 +52,7 @@ public class WavsepStatic {
 
 	private static ClientApi initClientApi() throws Exception {
 		ClientApi client = new ClientApi(zapHost, zapPort);
-		client.newSession();
+		client.core.newSession("", "Wavsep test", "true");
 		return client;
 	}
 	
@@ -142,7 +142,7 @@ public class WavsepStatic {
 		//client.spiderUrl(nodeName);
 		//Thread.sleep(sleepInMs);
 		
-		client.activeScanUrl(nodeName);
+		client.ascan.scan("", nodeName, "true", "false");
 		Thread.sleep(sleepInMs);
 
 		List<Alert> ignoreAlertsList = new ArrayList<>(ignoreAlerts.length);
