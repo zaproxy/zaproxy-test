@@ -86,7 +86,7 @@ public abstract class WithBasicInfrastructureIntegrationTest {
 	
 	private static void initializeLocale() throws Exception {
 		Constant.setLocale("de_DE");
-		Model.getSingleton().init();
+		Model.getSingleton().init(null);
 	}
 
 	/**
