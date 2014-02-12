@@ -47,6 +47,7 @@ public class PluginPassiveScannerUnitTest {
 	public void shouldEnableByDefaultIsNotSpecifiedInConfiguration() {
 		// given
 		given(configuration.getBoolean(anyString(), eq(true))).willReturn(true);
+		given(configuration.getString(anyString(), anyString())).willReturn(AlertThreshold.DEFAULT.name());
 		// when
 		scanner.setConfig(configuration);
 		// then
@@ -56,8 +57,8 @@ public class PluginPassiveScannerUnitTest {
 	@Test
 	public void shouldDisableIfSpecifiedInConfiguration() {
 		// given
-		given(configuration.getBoolean(anyString(), anyBoolean())).willReturn(
-				false);
+		given(configuration.getBoolean(anyString(), anyBoolean())).willReturn(false);
+		given(configuration.getString(anyString(), anyString())).willReturn(AlertThreshold.DEFAULT.name());
 		// when
 		scanner.setConfig(configuration);
 		// then
@@ -68,6 +69,7 @@ public class PluginPassiveScannerUnitTest {
 	public void shouldPersistEnabledStatusInConfigurationOnSave() {
 		// given
 		given(configuration.getBoolean(anyString(), eq(true))).willReturn(true);
+		given(configuration.getString(anyString(), anyString())).willReturn(AlertThreshold.DEFAULT.name());
 		// when
 		scanner.setConfig(configuration);
 		scanner.save();
