@@ -11,6 +11,7 @@ import org.zaproxy.zap.authentication.AuthenticationUnitTestSuite;
 import org.zaproxy.zap.control.AddOnCollectionUnitTest;
 import org.zaproxy.zap.control.AddOnUnitTest;
 import org.zaproxy.zap.control.ZapReleaseUnitTest;
+import org.zaproxy.zap.extension.ZapExtensionsUnitTestSuite;
 import org.zaproxy.zap.extension.api.ApiResponseConversionUtilsUnitTest;
 import org.zaproxy.zap.extension.auth.ContextAuthUnitTest;
 import org.zaproxy.zap.extension.httppanel.view.hex.HttpPanelHexModelUnitTest;
@@ -67,7 +68,8 @@ import com.sittinglittleduck.DirBuster.EasySSLProtocolSocketFactoryUnitTest;
 		VariantODataUnitTest.class,
 		XMLStringUtilUnitTest.class,
 		ZapReleaseUnitTest.class,
-		ApiResponseConversionUtilsUnitTest.class
+		ApiResponseConversionUtilsUnitTest.class,
+        ZapExtensionsUnitTestSuite.class
 		})
 public final class ZaproxyUnitTestSuite {
 
