@@ -57,7 +57,7 @@ public class ApiResponseConversionUtilsUnitTest {
 	public void historyIdShouldBecomeIdOfApiResponse() {
 		ApiResponseSet response = ApiResponseConversionUtils.httpMessageToSet(42, message);
 
-		assertThat(response.getValues(), hasEntry("id", "42"));
+		assertThat(response.getValues(), hasEntry("id", (Object)"42"));
 	}
 
 	@Test
@@ -71,11 +71,11 @@ public class ApiResponseConversionUtilsUnitTest {
 		ApiResponseSet response = ApiResponseConversionUtils.httpMessageToSet(0, message);
 		
 			
-		assertThat(response.getValues(), hasEntry("cookieParams", "testCookieParams"));
-		assertThat(response.getValues(), hasEntry("note", "testNote"));
-		assertThat(response.getValues(), hasEntry("requestHeader", requestHeader.toString()));
-		assertThat(response.getValues(), hasEntry("requestBody", requestBody.toString()));
-		assertThat(response.getValues(), hasEntry("responseHeader", responseHeader.toString()));
+		assertThat(response.getValues(), hasEntry("cookieParams", (Object)"testCookieParams"));
+		assertThat(response.getValues(), hasEntry("note", (Object)"testNote"));
+		assertThat(response.getValues(), hasEntry("requestHeader", (Object)requestHeader.toString()));
+		assertThat(response.getValues(), hasEntry("requestBody", (Object)requestBody.toString()));
+		assertThat(response.getValues(), hasEntry("responseHeader", (Object)responseHeader.toString()));
 	}
 
 	@Test
@@ -85,7 +85,7 @@ public class ApiResponseConversionUtilsUnitTest {
 
 		ApiResponseSet response = ApiResponseConversionUtils.httpMessageToSet(0, message);
 		
-		assertThat(response.getValues(), hasEntry("responseBody", "abc"));
+		assertThat(response.getValues(), hasEntry("responseBody", (Object)"abc"));
 	}
 
 	@Test
@@ -95,7 +95,7 @@ public class ApiResponseConversionUtilsUnitTest {
 
 		ApiResponseSet response = ApiResponseConversionUtils.httpMessageToSet(0, message);
 		
-		assertThat(response.getValues(), hasEntry("responseBody", responseBody.toString()));
+		assertThat(response.getValues(), hasEntry("responseBody", (Object)responseBody.toString()));
 	}
 	
 	private byte[] gzip(byte[] raw) throws Exception {
