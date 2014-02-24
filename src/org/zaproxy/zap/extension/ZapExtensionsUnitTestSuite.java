@@ -3,6 +3,10 @@ package org.zaproxy.zap.extension;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.zaproxy.zap.extension.api.ApiResponseConversionUtilsUnitTest;
+import org.zaproxy.zap.extension.auth.ContextAuthUnitTest;
+import org.zaproxy.zap.extension.httppanel.view.hex.HttpPanelHexModelUnitTest;
+import org.zaproxy.zap.extension.pscan.PluginPassiveScannerUnitTest;
 import org.zaproxy.zap.extension.websocket.utility.Utf8UtilUnitTest;
 
 /**
@@ -13,7 +17,7 @@ import org.zaproxy.zap.extension.websocket.utility.Utf8UtilUnitTest;
  * @author bjoern.kimminich@gmx.de
  */
 @RunWith(Suite.class)
-@SuiteClasses({Utf8UtilUnitTest.class})
+@SuiteClasses({Utf8UtilUnitTest.class, ApiResponseConversionUtilsUnitTest.class, ContextAuthUnitTest.class, HttpPanelHexModelUnitTest.class, PluginPassiveScannerUnitTest.class})
 public final class ZapExtensionsUnitTestSuite {
 
 }
