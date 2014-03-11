@@ -1,4 +1,4 @@
-<project name="zap" default="test" basedir=".">
+<project name="zaproxy-test" default="test" basedir=".">
 	<description>Run the ZAP JUnit tests.</description>
 	<!-- set global properties for this build -->
     <property name="build" location="build" />
