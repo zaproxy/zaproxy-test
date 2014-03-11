@@ -3,8 +3,8 @@ package org.zaproxy;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import org.zaproxy.zap.ZaproxyAllTestSuite;
-import org.zaproxy.zap.extension.ZapExtensionsAllTestSuite;
+import org.zaproxy.zap.ZaproxyIntegrationTestSuite;
+import org.zaproxy.zap.extension.ZapExtensionsIntegrationTestSuite;
 
 /**
  * Suite for all tests of ZAP and ZAP Extensions. This is the top of the suite
@@ -13,7 +13,7 @@ import org.zaproxy.zap.extension.ZapExtensionsAllTestSuite;
  * @author bjoern.kimminich@gmx.de
  */
 @RunWith(Suite.class)
-@SuiteClasses({ ZaproxyAllTestSuite.class, ZapExtensionsAllTestSuite.class })
+@SuiteClasses({ ZaproxyIntegrationTestSuite.class, ZapExtensionsIntegrationTestSuite.class })
 public final class ZapAllTestSuite {
 
 }
