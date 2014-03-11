@@ -79,8 +79,11 @@
             <formatter type="plain"/>
             <formatter type="xml"/>
             <batchtest fork="yes" todir="results">
-                <fileset dir="src">
-                    <include name="org/zaproxy/ZapAllTestSuite.java"/>
+                <fileset dir="${zaproxy}/test">
+                    <include name="**/*UnitTest.java"/>
+                </fileset>
+                <fileset dir="${zaproxy-extensions}/test">
+                    <include name="**/*UnitTest.java"/>
                 </fileset>
             </batchtest>
 		</junit>
