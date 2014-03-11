@@ -51,7 +51,35 @@
         		<pathelement location="${zaproxy-extensions}/build/build"/>
             </classpath>
         </javac>
-
+        <javac srcdir="${zaproxy}/test" destdir="${build}" source="${src.version}" target="${src.version}" includeantruntime="false" debug="${debug}">
+            <classpath>
+                <fileset dir="${zaproxy}/testlib">
+                    <include name="*.jar" />
+                </fileset>
+                <fileset dir="${zaproxy}/lib">
+                    <include name="*.jar" />
+                    <exclude name="ant.jar" />
+                </fileset>
+                <fileset dir="${zaproxy}/build/zap">
+                    <include name="zap.jar" />
+                </fileset>
+            </classpath>
+        </javac>
+        <javac srcdir="${zaproxy-extensions}/test" destdir="${build}" source="${src.version}" target="${src.version}" includeantruntime="false" debug="${debug}">
+            <classpath>
+                <fileset dir="${zaproxy-extensions}/testlib">
+                    <include name="*.jar" />
+                </fileset>
+                <fileset dir="${zaproxy}/lib">
+                    <include name="*.jar" />
+                    <exclude name="ant.jar" />
+                </fileset>
+                <fileset dir="${zaproxy}/build/zap">
+                    <include name="zap.jar" />
+                </fileset>
+                <pathelement location="${zaproxy-extensions}/build/build"/>
+            </classpath>
+        </javac>
     </target>
 
 	<target name="test" depends="compile">
@@ -79,11 +107,9 @@
             <formatter type="plain"/>
             <formatter type="xml"/>
             <batchtest fork="yes" todir="results">
-                <fileset dir="${zaproxy}/test">
-                    <include name="**/*UnitTest.java"/>
-                </fileset>
-                <fileset dir="${zaproxy-extensions}/test">
-                    <include name="**/*UnitTest.java"/>
+                <fileset dir="${build}">
+                    <include name="**/*UnitTest.class"/>
+                    <exclude name="**/Abstract*Test.class"/>
                 </fileset>
             </batchtest>
 		</junit>
