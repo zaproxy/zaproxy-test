@@ -22,6 +22,7 @@
     </condition>
 	
     <target name="init">
+        <delete dir="${build}" includeEmptyDirs="true" />
         <mkdir dir="${build}" />
     </target>
 
