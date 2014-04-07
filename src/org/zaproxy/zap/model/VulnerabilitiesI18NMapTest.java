@@ -3,7 +3,6 @@ package org.zaproxy.zap.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
