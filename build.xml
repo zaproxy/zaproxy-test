@@ -26,6 +26,24 @@
         <mkdir dir="${build}" />
     </target>
 
+    <macrodef name="compile-extensions-unittests">
+        <attribute name="basedir"/>
+        <attribute name="destdir" />
+        <sequential>
+            <javac srcdir="@{basedir}/test" destdir="@{destdir}" source="${src.version}" target="${src.version}" includeantruntime="false" debug="${debug}">
+                <classpath>
+                    <fileset dir="@{basedir}/testlib">
+                        <include name="*.jar" />
+                    </fileset>
+                    <fileset dir="@{basedir}/lib">
+                        <include name="*.jar" />
+                    </fileset>
+                    <pathelement location="@{basedir}/build/build"/>
+                </classpath>
+            </javac>
+        </sequential>
+    </macrodef>
+
     <target name="compile" depends="init" description="compile the source ">
         <echo message="Compiling the source..." />
 
@@ -34,6 +52,10 @@
         <condition property="debug" value="true" else="false">
             <istrue value="${javac.debug}" />
         </condition>
+
+        <compile-extensions-unittests basedir="${zaproxy-extensions}" destdir="${build}" />
+        <compile-extensions-unittests basedir="${zaproxy-extensions-beta}" destdir="${build}" />
+        <compile-extensions-unittests basedir="${zaproxy-extensions-alpha}" destdir="${build}" />
 
     	<!-- Compile the java code from ${src} into ${build} -->
         <!--javac srcdir="${src}" destdir="${build}" classpath="zap.jar"/-->
@@ -49,7 +71,10 @@
         		<fileset dir="${zaproxy}/build/zap">
         			<include name="zap.jar" />
         		</fileset>
+        		<pathelement location="${build}"/>
         		<pathelement location="${zaproxy-extensions}/build/build"/>
+        		<pathelement location="${zaproxy-extensions-beta}/build/build"/>
+        		<pathelement location="${zaproxy-extensions-alpha}/build/build"/>
             </classpath>
         </javac>
         <javac srcdir="${zaproxy}/test" destdir="${build}" source="${src.version}" target="${src.version}" includeantruntime="false" debug="${debug}">
@@ -64,21 +89,6 @@
                 <fileset dir="${zaproxy}/build/zap">
                     <include name="zap.jar" />
                 </fileset>
-            </classpath>
-        </javac>
-        <javac srcdir="${zaproxy-extensions}/test" destdir="${build}" source="${src.version}" target="${src.version}" includeantruntime="false" debug="${debug}">
-            <classpath>
-                <fileset dir="${zaproxy-extensions}/testlib">
-                    <include name="*.jar" />
-                </fileset>
-                <fileset dir="${zaproxy}/lib">
-                    <include name="*.jar" />
-                    <exclude name="ant.jar" />
-                </fileset>
-                <fileset dir="${zaproxy}/build/zap">
-                    <include name="zap.jar" />
-                </fileset>
-                <pathelement location="${zaproxy-extensions}/build/build"/>
             </classpath>
         </javac>
     </target>
@@ -102,6 +112,10 @@
             	
         		<pathelement location="${zaproxy-extensions}/bin"/>		<!-- When running in Eclipse -->
         		<pathelement location="${zaproxy-extensions}/build/build"/>	<!-- When running on build server -->
+        		<pathelement location="${zaproxy-extensions-beta}/bin"/>
+        		<pathelement location="${zaproxy-extensions-beta}/build/build"/>
+        		<pathelement location="${zaproxy-extensions-alpha}/bin"/>
+        		<pathelement location="${zaproxy-extensions-alpha}/build/build"/>
         		<pathelement location="bin"/>		<!-- When running in Eclipse -->
         		<pathelement location="build"/>		<!-- When running on build server -->
             </classpath>
