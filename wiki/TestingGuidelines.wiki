@@ -1,6 +1,8 @@
 #labels Featured
 Before working on zaproxy-test please read the following page carefully and use it as a guideline when writing tests for ZAP!
 
+<wiki:toc max_depth="1" />
+
 = Tests =
 
 == Unit Tests ==
