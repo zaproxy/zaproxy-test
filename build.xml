@@ -235,8 +235,8 @@
 
     	<exec dir="${test-dir}" executable="${script}" spawn="true">
     	    <arg value="-daemon"/>
-    	    <arg value="-dir test"/>
-    	    <arg value="-port 8090"/>
+    	    <arg line="-dir test"/>
+    	    <arg line="-port 8090"/>
     	</exec>
 
     	<!-- Give plenty of time to start up -->
@@ -272,8 +272,8 @@
 
     	<exec dir="${test-dir}" executable="${script}" spawn="true">
     	    <arg value="-daemon"/>
-    	    <arg value="-dir test"/>
-    	    <arg value="-port 8090"/>
+    	    <arg line="-dir test"/>
+    	    <arg line="-port 8090"/>
     	</exec>
 
     	<!-- Give plenty of time to start up -->
@@ -312,10 +312,11 @@
 
     	<exec dir="${test-dir}" executable="${script}">
     	    <arg value="-cmd"/>
-    	    <arg value="-dir test"/>
-    	    <arg value="-quickurl ${test-url}"/>
-    	    <arg value="-quickout scan-result.xml"/>
-    	    <arg value="-port 8090"/>
+    	    <arg line="-dir test"/>
+    	    <arg value="-quickurl"/>
+    	    <arg value="${test-url}"/>
+    	    <arg line="-quickout scan-result.xml"/>
+    	    <arg line="-port 8090"/>
     	</exec>
     	
 		<antcall target="check-for-errors"> 
@@ -380,7 +381,8 @@
 	
 	<target name="startZap">
 		<java classname="org.zaproxy.zap.ZAP" fork="true" spawn="true" dir="${zapdir}">
-			<arg value="-port ${zapport}"/>
+			<arg value="-port"/>
+			<arg value="${zapport}"/>
 			<classpath>
 				<pathelement location="${zapdir}/zap.jar"/>
 			</classpath>
@@ -392,7 +394,8 @@
 	<target name="startZapDaemon">
 		<java classname="org.zaproxy.zap.ZAP" fork="true" spawn="true" dir="${zapdir}">
 			<arg value="-daemon"/>
-			<arg value="-port ${zapport}"/>
+			<arg value="-port"/>
+			<arg value="${zapport}"/>
 			<classpath>
 				<pathelement location="${zapdir}/zap.jar"/>
 			</classpath>
