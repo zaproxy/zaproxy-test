@@ -2,6 +2,9 @@
 	<description>Run the ZAP JUnit tests.</description>
 	<!-- set global properties for this build -->
     <property name="build" location="build" />
+    <property name="build.src" location="src-build" />
+    <property name="helpertasks.jar.name" value="helpertasks.jar" />
+    <property name="lib.dir" location="lib" />
     <property name="src" location="src" />
     <property name="src.version" value="1.7" />
 	<property name="zaproxy" location="../zaproxy" />
@@ -9,6 +12,14 @@
 	<property name="zaproxy-extensions" location="../zap-extensions" />
 	<property name="zaproxy-extensions-beta" location="../zap-extensions-beta" />
 	<property name="zaproxy-extensions-alpha" location="../zap-extensions-alpha" />
+
+    <path id="build.helpertasks.classpath">
+        <fileset dir="${lib.dir}" includes="${helpertasks.jar.name}"/>
+        <fileset dir="${zaproxy}/build/zap" includes="zap.jar"/>
+    </path>
+
+    <!-- Requires ZAP's clientapi at runtime (built with zaproxy project and included with zap.jar) -->
+    <typedef name="stopzapwithtimeout" classname="org.zaproxy.ant.zap.taskdefs.StopZapTimeout" classpathref="build.helpertasks.classpath" />
 
     <!-- Detect Operating system -->
     <condition property="isMac">
@@ -24,6 +35,28 @@
     <target name="init">
         <delete dir="${build}" includeEmptyDirs="true" />
         <mkdir dir="${build}" />
+    </target>
+
+    <target name="build-helpertasks-jar" depends="init">
+        <local name="build.classes.dir" />
+        <property name="build.classes.dir" location="${build}/classes" />
+
+        <delete dir="${build.classes.dir}" includeEmptyDirs="true" />
+        <mkdir dir="${build.classes.dir}"/>
+
+        <javac srcdir="${build.src}" destdir="${build.classes.dir}" source="${src.version}" 
+            target="${src.version}" includeantruntime="false" encoding="UTF-8">
+            <!-- Include required ZAP's clientapi -->
+            <classpath>
+                <fileset dir="${zaproxy}/build/zap">
+                    <include name="zap.jar" />
+                </fileset>
+            </classpath>
+        </javac>
+
+        <jar jarfile="${lib.dir}/${helpertasks.jar.name}" update="true" compress="false" basedir="${build.classes.dir}" />
+
+        <delete dir="${build.classes.dir}" includeEmptyDirs="true" />
     </target>
 
     <macrodef name="compile-extensions-unittests">
@@ -99,6 +132,7 @@
             <classpath>
         		<fileset dir="lib">
         			<include name="*.jar" />
+        			<exclude name="ant*.jar" />
         		</fileset>
         		<fileset dir="${zaproxy}/lib">
         			<include name="*.jar" />
@@ -233,17 +267,17 @@
             <istrue value="${isWindows}" />
         </condition>
 
+        <local name="zapport" />
+        <property name="zapport" value="8090" />
+
     	<exec dir="${test-dir}" executable="${script}" spawn="true">
     	    <arg value="-daemon"/>
     	    <arg line="-dir test"/>
-    	    <arg line="-port 8090"/>
+    	    <arg value="-port"/>
+    	    <arg value="${zapport}"/>
     	</exec>
 
-    	<!-- Give plenty of time to start up -->
-    	<sleep seconds="20"/>
-    	
-    	<!-- Stop by accessing the API directly -->
-    	<get src="http://localhost:8090/JSON/core/action/shutdown/" dest="${test-dir}/shutdown.json"/>
+    	<stopzapwithtimeout zapaddress="localhost" zapport="${zapport}" timeout="60" pollinginterval="1" />
 
     	<!-- Give time to shut down -->
         <sleep seconds="5"/>
@@ -270,17 +304,17 @@
             <istrue value="${isWindows}" />
         </condition>
 
+        <local name="zapport" />
+        <property name="zapport" value="8090" />
+
     	<exec dir="${test-dir}" executable="${script}" spawn="true">
     	    <arg value="-daemon"/>
     	    <arg line="-dir test"/>
-    	    <arg line="-port 8090"/>
+    	    <arg value="-port"/>
+    	    <arg value="${zapport}"/>
     	</exec>
 
-    	<!-- Give plenty of time to start up -->
-    	<sleep seconds="20"/>
-    	
-    	<!-- Stop by accessing the API directly -->
-    	<get src="http://localhost:8090/JSON/core/action/shutdown/" dest="${test-dir}/shutdown.json"/>
+        <stopzapwithtimeout zapaddress="localhost" zapport="${zapport}" timeout="60" pollinginterval="1" />
 
     	<!-- Give time to shut down -->
         <sleep seconds="5"/>
@@ -349,6 +383,7 @@
             <classpath>
         		<fileset dir="lib">
         			<include name="*.jar" />
+        			<exclude name="ant*.jar" />
         		</fileset>
         		<fileset dir="${zaproxy}/lib">
         			<include name="*.jar" />
