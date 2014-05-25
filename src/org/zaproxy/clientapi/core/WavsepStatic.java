@@ -26,7 +26,7 @@ import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import org.apache.commons.httpclient.URI;
-import org.zaproxy.clientapi.core.Alert.Reliability;
+import org.zaproxy.clientapi.core.Alert.Confidence;
 import org.zaproxy.clientapi.core.Alert.Risk;
 
 public class WavsepStatic {
@@ -43,11 +43,11 @@ public class WavsepStatic {
 	public static Alert CROSS_SITE_SCRIPTING = 
 			new Alert("Cross Site Scripting", "", Risk.High, null, "", "");
 	public static Alert INFO_DISCLOSURE_IN_URL = 
-			new Alert("Information disclosure - sensitive informations in URL", "", Risk.Informational, Reliability.Warning, "", "");
+			new Alert("Information disclosure - sensitive informations in URL", "", Risk.Informational, Confidence.Medium, "", "");
 	public static Alert X_CONTENT_TYPE_HEADER_MISSING = 
-			new Alert("X-Content-Type-Options header missing", "", Risk.Low, Reliability.Warning, "", "");
+			new Alert("X-Content-Type-Options header missing", "", Risk.Low, Confidence.Medium, "", "");
 	public static Alert X_FRAME_OPTIONS_HEADER_MISSING = 
-			new Alert("X-Frame-Options header not set", "", Risk.Informational, Reliability.Warning, "", ""); 
+			new Alert("X-Frame-Options header not set", "", Risk.Informational, Confidence.Medium, "", ""); 
 
 
 	private static ClientApi initClientApi() throws Exception {
