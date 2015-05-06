@@ -1,6 +1,8 @@
 # zaproxy-test
 This project was exported from https://code.google.com/p/zaproxy-test
 
+Note that the plan is to move all of the tests into the relevant projects, at which point this project will be frozen and just maintained for historical purposes.
+
 The zaproxy-test project contains all developer's test code for the OWASP Zed Attack Proxy (ZAP) and its extensions. This includes (but is not limited to)
 
 * Unit Tests for ensuring the intended behavior of individual classes
